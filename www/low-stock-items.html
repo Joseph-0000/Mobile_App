@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Stock Items</title>
+</head>
+<body>
+    <h1>Low Stock Items</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody id="lowStockItemsTableBody"></tbody>
+    </table>
+
+    <script>
+        // Retrieve the products list from localStorage
+        const productsList = JSON.parse(localStorage.getItem("products")) || [];
+
+        // Function to display low stock items or a message if none found
+        function displayLowStockItems() {
+            const lowStockItemsTableBody = document.getElementById("lowStockItemsTableBody");
+
+            // Clear the table body
+            lowStockItemsTableBody.innerHTML = "";
+
+            // Flag to check if any low stock items are found
+            let foundLowStockItems = false;
+
+            for (const product of productsList) {
+                // Check if the lowStockWarning is greater than or equal to the amount
+                if (product.lowStockWarning >= product.amount) {
+                    const row = document.createElement("tr");
+                    const productNameCell = document.createElement("td");
+                    const amountCell = document.createElement("td");
+
+                    productNameCell.textContent = product.productName;
+                    amountCell.textContent = product.amount;
+
+                    row.appendChild(productNameCell);
+                    row.appendChild(amountCell);
+
+                    lowStockItemsTableBody.appendChild(row);
+
+                    // Set the flag to true if low stock items are found
+                    foundLowStockItems = true;
+                }
+            }
+
+            // If no low stock items are found, display a message
+            if (!foundLowStockItems) {
+                const noLowStockMessageRow = document.createElement("tr");
+                const noLowStockMessageCell = document.createElement("td");
+                noLowStockMessageCell.setAttribute("colspan", "2");
+                noLowStockMessageCell.textContent = "No low quantity items found";
+                noLowStockMessageRow.appendChild(noLowStockMessageCell);
+                lowStockItemsTableBody.appendChild(noLowStockMessageRow);
+            }
+        }
+
+        // Display the low stock items when the page loads
+        displayLowStockItems();
+    </script>
+</body>
+</html>

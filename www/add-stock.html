@@ -57,20 +57,52 @@
         document.getElementById("addStockForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent the form from submitting and reloading the page
 
-            // Loop through the products and retrieve the quantities entered by the user
-            for (const product of productListToAdd) {
-                const quantityInput = document.querySelector(`input[name="quantity_${product.productName}"]`);
+            // Retrieve the existing product list from localStorage
+            const productList = JSON.parse(localStorage.getItem("products")) || [];
+
+            // Retrieve the current date
+            const currentDate = new Date().toLocaleDateString();
+
+            // Loop through the products to be added
+            for (const productToAdd of productListToAdd) {
+                const quantityInput = document.querySelector(`input[name="quantity_${productToAdd.productName}"]`);
                 const quantity = parseInt(quantityInput.value, 10);
 
                 // Check if a valid quantity was entered
                 if (!isNaN(quantity) && quantity > 0) {
-                    // Update the product's amount in localStorage
-                    product.amount = parseInt(product.amount, 10) + quantity;
+                    // Find the existing product by name in the product list
+                    const existingProduct = productList.find((product) => product.productName === productToAdd.productName);
+
+                    if (existingProduct) {
+                        // Update the existing product's amount
+                        existingProduct.amount += quantity;
+                    } else {
+                        // Add the new product to the product list
+                        productToAdd.amount = quantity;
+                        productList.push(productToAdd);
+                    }
+
+                    // Save the product name, amount, date, and type to history in localStorage
+                    const historyEntry = {
+                        productName: productToAdd.productName,
+                        amount: quantity,
+                        date: currentDate,
+                        type: "addstock" // Type indicating an addition to stock
+                    };
+
+                    // Retrieve the existing history from localStorage
+                    const history = JSON.parse(localStorage.getItem("history")) || [];
+
+                    // Add the history entry to the list
+                    history.push(historyEntry);
+
+                    // Save the updated history list to localStorage
+                    localStorage.setItem("history", JSON.stringify(history));
                 }
             }
 
             // Save the updated product list to localStorage
-            localStorage.setItem("products", JSON.stringify(productListToAdd));
+            localStorage.setItem("products", JSON.stringify(productList));
 
             // Clear the form and the localStorage
             localStorage.removeItem("productsToAdd");
