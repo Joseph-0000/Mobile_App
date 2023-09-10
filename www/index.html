@@ -1,50 +1,67 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+</head>
+<body>
+    <h1>Product Management</h1>
+    
+    <form id="productForm">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" required><br><br>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+        <label for="barcode">Barcode:</label>
+        <input type="text" id="barcode" required><br><br>
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-            https://cordova.apache.org/docs/en/latest/
-        Some notes:
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" required><br><br>
+
+        <label for="buyPrice">Buy Price:</label>
+        <input type="number" step="0.01" id="buyPrice" required><br><br>
+
+        <label for="sellPrice">Sell Price:</label>
+        <input type="number" step="0.01" id="sellPrice" required><br><br>
+
+        <label for="lowStockWarning">Low Stock Warning:</label>
+        <input type="number" id="lowStockWarning" required><br><br>
+
+        <button type="button" onclick="addProduct()">Add Product</button>
+    </form>
+
+    <script>
+        function addProduct() {
+            // Get input values
+            const productName = document.getElementById("productName").value;
+            const barcode = document.getElementById("barcode").value;
+            const amount = document.getElementById("amount").value;
+            const buyPrice = document.getElementById("buyPrice").value;
+            const sellPrice = document.getElementById("sellPrice").value;
+            const lowStockWarning = document.getElementById("lowStockWarning").value;
+
+            // Create a product object
+            const product = {
+                productName,
+                barcode,
+                amount,
+                buyPrice,
+                sellPrice,
+                lowStockWarning
+            };
+
+            // Retrieve existing products from localStorage or create an empty array
+            const products = JSON.parse(localStorage.getItem("products")) || [];
+
+            // Add the new product to the array
+            products.push(product);
+
+            // Save the updated product list to localStorage
+            localStorage.setItem("products", JSON.stringify(products));
+
+            // Clear the form
+            document.getElementById("productForm").reset();
+        }
+    </script>
+</body>
 </html>
