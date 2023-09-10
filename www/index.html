@@ -52,11 +52,12 @@
     <!-- Product List Popup -->
     <div id="productPopup" style="display: none;">
         <h1>Select Items</h1>
+        <input type="text" id="searchInput" placeholder="Search items"> <!-- Add a search input field -->
         <ul id="productList"></ul>
-        <!-- Add the "Done" button -->
-        <button id="doneButton">Done</button>
+        <button id="doneButton">Done</button> <!-- Move the "Done" button here -->
     </div>
     <p id="totalPrice"></p>
+    <!-- Payment Component -->
     <!-- Payment Component -->
     <div id="paymentForm" style="display: none;">
         <h2>Payment</h2>
@@ -65,7 +66,9 @@
         <button id="calculateChangeButton">Calculate Change</button>
         <p id="change"></p>
     </div>
+
     <button id="saveTransactionButton" onclick="saveTransaction()">Save Transaction</button>
+    <button id="clearTransactionsButton">Clear Transactions</button>
     <script src="js/index.js"></script>
 </body>
 </html>
