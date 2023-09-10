@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+</head>
+<body>
+    <h1>Saved Transactions</h1>
+    <ul id="transactionList"></ul>
+    
+    <script>
+        // Retrieve saved transactions from localStorage
+        const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+        // Display saved transactions in a list
+        const transactionList = document.getElementById("transactionList");
+        transactions.forEach((transaction, index) => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                <strong>Date:</strong> ${transaction.date}<br>
+                <strong>Total Price:</strong> ${transaction.totalPrice}<br>
+                <strong>Products:</strong><br>
+            `;
+            transaction.products.forEach((product) => {
+                listItem.innerHTML += `
+                    - ${product.quantity} x ${product.productName} - $${product.price.toFixed(2)} each<br>
+                `;
+            });
+            listItem.innerHTML += "<hr>";
+            transactionList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

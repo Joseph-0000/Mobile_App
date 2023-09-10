@@ -24,11 +24,26 @@
         .productPopup{
             background-color: red;
         }
+
+        /* Makes the popup overlap the screen */
+        #productPopup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); 
+            display: none;
+            z-index: 999; 
+            overflow: auto;
+        }
+        
     </style>
 </head>
 <body>
-    <header></header>
+    <header><h1>Sari-Sari App</h1></header>
     <main>
+        <h1>Transaction</h1>
         <button id="add_item" onclick="showProductPopup()"><img src="./img/plus_icon.png" alt=""></button>
         <!-- Add a div to display selected products -->
         <div id="selectedProducts"></div>
@@ -42,6 +57,15 @@
         <button id="doneButton">Done</button>
     </div>
     <p id="totalPrice"></p>
+    <!-- Payment Component -->
+    <div id="paymentForm" style="display: none;">
+        <h2>Payment</h2>
+        <label for="paymentAmount">Enter Payment Amount: $</label>
+        <input type="number" id="paymentAmount" step="0.01" min="0" required>
+        <button id="calculateChangeButton">Calculate Change</button>
+        <p id="change"></p>
+    </div>
+    <button id="saveTransactionButton" onclick="saveTransaction()">Save Transaction</button>
     <script src="js/index.js"></script>
 </body>
 </html>

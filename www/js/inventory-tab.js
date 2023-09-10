@@ -18,9 +18,6 @@ function displayProductList() {
     });
 }
 
-
-
-
 function viewProduct(index) {
     // Store the selected product index in localStorage
     localStorage.setItem("selectedProductIndex", index);

@@ -129,11 +129,13 @@ function showProductPopup() {
 }
 
 // Add an event listener to the "Done" button
+// Add an event listener to the "Done" button
 const doneButton = document.getElementById("doneButton");
 doneButton.addEventListener("click", function () {
     // Calculate the total price of selected items
     let totalSelectedPrice = 0;
     const selectedProducts = document.getElementById("selectedProducts");
+    const productPopup = document.getElementById('productPopup');
 
     selectedProducts.querySelectorAll("div").forEach((item) => {
         const parts = item.textContent.split(" - Total Price: $");
@@ -145,10 +147,109 @@ doneButton.addEventListener("click", function () {
     // Display the total price in index.html
     const totalPriceElement = document.getElementById("totalPrice");
     totalPriceElement.textContent = `Total Price: $${totalSelectedPrice.toFixed(2)}`;
-
-    // Close the productPopup
-    const productPopup = document.getElementById('productPopup');
-    productPopup.style.display = 'none';
+    productPopup.style.display ='none';
+    
+    // Show the payment form
+    const paymentForm = document.getElementById("paymentForm");
+    paymentForm.style.display = 'block';
 });
+
+// Add an event listener to the "Calculate Change" button
+const calculateChangeButton = document.getElementById("calculateChangeButton");
+calculateChangeButton.addEventListener("click", function () {
+    const paymentAmountInput = document.getElementById("paymentAmount");
+    const paymentAmount = parseFloat(paymentAmountInput.value);
+    if (isNaN(paymentAmount) || paymentAmount < 0) {
+        alert("Invalid payment amount. Please enter a valid amount.");
+        return;
+    }
+
+    const totalSelectedPrice = parseFloat(document.getElementById("totalPrice").textContent.split("$")[1]);
+    const change = paymentAmount - totalSelectedPrice;
+    const changeElement = document.getElementById("change");
+    changeElement.textContent = `Change: $${change.toFixed(2)}`;
+
+    // Hide the payment form after calculating the change
+    const paymentForm = document.getElementById("paymentForm");
+
+    // Clear the payment input field
+    paymentAmountInput.value = "";
+});
+
+
+// Define a function to save the transaction
+// Define a function to save the transaction
+function saveTransaction() {
+    // Retrieve the transaction details
+    const selectedProducts = document.getElementById("selectedProducts");
+    const totalSelectedPrice = document.getElementById("totalPrice").textContent;
+    const paymentAmountInput = document.getElementById("paymentAmount");
+    
+    // Parse the payment amount
+    const paymentAmount = parseFloat(paymentAmountInput.value);
+    
+    // Ensure the payment amount is valid
+    if (isNaN(paymentAmount) || paymentAmount < 0) {
+        alert("Invalid payment amount. Please enter a valid amount.");
+        return;
+    }
+    
+    // Calculate the change
+    const change = paymentAmount - parseFloat(totalSelectedPrice.split("$")[1]);
+    
+    // Create a transaction object
+    const transaction = {
+        date: new Date().toLocaleDateString(),
+        products: [],
+        totalPrice: totalSelectedPrice,
+        paymentAmount: paymentAmount,
+        change: change
+    };
+
+    selectedProducts.querySelectorAll("div").forEach((item) => {
+        const parts = item.textContent.split(" - Total Price: $");
+        if (parts.length === 2) {
+            const productName = parts[0].split(" - ")[1];
+            const quantity = parseInt(parts[0].split(" - ")[0]);
+            const price = parseFloat(parts[1]);
+            transaction.products.push({ productName, quantity, price });
+        }
+    });
+
+    // Save the transaction details to localStorage
+    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    transactions.push(transaction);
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+
+    // Clear the transaction on the index.html
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+    const totalPriceElement = document.getElementById("totalPrice");
+    totalPriceElement.textContent = "";
+    const paymentForm = document.getElementById("paymentForm");
+    paymentForm.style.display = "none";
+
+    // Clear the selected products display
+    selectedProducts.innerHTML = "";
+    
+    // Clear the payment input field
+    paymentAmountInput.value = "";
+
+    // Display a success message
+    alert("Transaction saved successfully!");
+}
+
+// Add an event listener to the "Save Transaction" button once
+const saveTransactionButton = document.getElementById("saveTransactionButton");
+saveTransactionButton.addEventListener("click", function (event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+
+    // Call the saveTransaction function
+    saveTransaction();
+});
+
+
+
 
 
