@@ -5,61 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 12px; /* Add some padding to create space from the edges */
-            position: relative;
+        header {
+            height: 55px;
+            width: 100%;
         }
-    
-        h1 {
-            align-self: flex-start;
-            margin: 2px 2px 8px 2px; /* Remove default margin */
+        .add_item {
+            height: 24px;
+            width: 24px;
         }
-    
-        div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 75%; /* Make divs take the full width of the screen */
-            height: 200px; /* Set the height of the div */
-            position: relative; /* Ensure the div is positioned */
-            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background color */
-            margin: 24px 0; /* Add vertical margin */
-            padding: 4px;
-            border-radius: 10px; /* Add some border-radius for rounded corners */
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Box shadow for the card effect */
-            transform: perspective(1000px) rotateY(0deg); /* Apply perspective for the 3D effect */
-            transition: transform 0.3s; /* Add a smooth transition */
-        }
-    
-        div:hover {
-            transform: perspective(1000px) rotateY(10deg); /* Adjust the rotation for the hover effect */
-        }
-    
         img {
-            max-width: 50%; /* Ensure the image doesn't exceed the container's width */
-            max-height: 50%; /* Ensure the image doesn't exceed the container's height */
+            height: 18px;
+            width: 18px;
+        }
+        .productList {
+            height: 100%;
+            width: 75%;
+        }
+        .productPopup{
+            background-color: red;
         }
     </style>
-    
 </head>
 <body>
-        <h1>Sari-Sari App</h1>
-        <div class="tab">
-            <img src="./img/inventory_icon.png" alt="">
-            <h2>Inventory</h2>
-        </div>
-        <div class="tab">
-            <img src="./img/sales_icon.jpg" alt="">
-            <h2>Sales</h2>
-        </div>
-        <div class="tab">
-            <img src="./img/shoppingCart_icon.webp" alt="">
-            <h2>Shopping Cart</h2>
-        </div>
+    <header></header>
+    <main>
+        <button id="add_item" onclick="showProductPopup()"><img src="./img/plus_icon.png" alt=""></button>
+        <!-- Add a div to display selected products -->
+        <div id="selectedProducts"></div>
+    </main>
+
+    <!-- Product List Popup -->
+    <div id="productPopup" style="display: none;">
+        <h1>Select Items</h1>
+        <ul id="productList"></ul>
+        <!-- Add the "Done" button -->
+        <button id="doneButton">Done</button>
+    </div>
+    <p id="totalPrice"></p>
+    <script src="js/index.js"></script>
 </body>
 </html>

@@ -8,7 +8,6 @@ function displayProductList() {
     products.forEach((product, index) => {
         const listItem = document.createElement("li");
         const viewButton = document.createElement("button");
-        // Show only the product name, price, and amount in the button text
         viewButton.textContent = `${product.productName} - $${product.price} - Amount: ${product.amount}`;
         viewButton.onclick = function () {
             viewProduct(index);
@@ -18,6 +17,9 @@ function displayProductList() {
         productList.appendChild(listItem);
     });
 }
+
+
+
 
 function viewProduct(index) {
     // Store the selected product index in localStorage
