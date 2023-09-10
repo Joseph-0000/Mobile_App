@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stock Search</title>
+</head>
+<body>
+    <h1>Add Stock Search</h1>
+    
+    <form id="searchForm">
+        <label for="searchInput">Search:</label>
+        <input type="text" id="searchInput" name="searchInput">
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="searchResults"></div>
+
+    <script>
+        // Retrieve products from localStorage
+        const products = JSON.parse(localStorage.getItem("products")) || [];
+
+        document.getElementById("searchForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from submitting and reloading the page
+
+            const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+            const searchResults = [];
+
+            // Iterate through the product list and check for matches
+            for (const product of products) {
+                if (product.productName.toLowerCase().includes(searchQuery)) {
+                    searchResults.push(product);
+                }
+            }
+
+            // Display the search results
+            displaySearchResults(searchResults);
+        });
+
+        function displaySearchResults(results) {
+            const searchResultsContainer = document.getElementById("searchResults");
+            searchResultsContainer.innerHTML = "";
+
+            if (results.length === 0) {
+                searchResultsContainer.innerHTML = "No matching products found.";
+                return;
+            }
+
+            const resultList = document.createElement("ul");
+            for (const product of results) {
+                const listItem = document.createElement("li");
+                const addButton = document.createElement("button");
+                addButton.textContent = `Add to List: ${product.productName}`;
+                addButton.addEventListener("click", function () {
+                    // Add the selected product to the list
+                    addProductToList(product);
+                });
+                listItem.appendChild(addButton);
+                resultList.appendChild(listItem);
+            }
+
+            searchResultsContainer.appendChild(resultList);
+        }
+
+        function addProductToList(product) {
+            // Retrieve the list of products to add to (or create a new array if none exists)
+            const productListToAdd = JSON.parse(localStorage.getItem("productsToAdd")) || [];
+            
+            // Add the selected product to the list
+            productListToAdd.push(product);
+            
+            // Save the updated list to localStorage
+            localStorage.setItem("productsToAdd", JSON.stringify(productListToAdd));
+            
+            // Redirect to "add-stock.html"
+            window.location.href = "add-stock.html";
+        }
+    </script>
+</body>
+</html>

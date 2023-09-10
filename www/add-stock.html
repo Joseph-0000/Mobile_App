@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stock</title>
+</head>
+<body>
+    <h1>Add Stock</h1>
+
+    <!-- Add a search button to redirect to add-stock-search.html -->
+    <button id="searchButton">Search for Products</button>
+
+    <form id="addStockForm">
+        <div id="productListToAdd"></div>
+        <button type="submit">Add to Stock</button>
+    </form>
+
+    <script>
+        // Retrieve the list of products to add from localStorage
+        const productListToAdd = JSON.parse(localStorage.getItem("productsToAdd")) || [];
+
+        function displayProductListToAdd() {
+            const productListToAddContainer = document.getElementById("productListToAdd");
+            productListToAddContainer.innerHTML = "";
+
+            if (productListToAdd.length === 0) {
+                productListToAddContainer.innerHTML = "No products to add to the stock.";
+                return;
+            }
+
+            const form = document.getElementById("addStockForm");
+
+            const productList = document.createElement("ul");
+            for (const product of productListToAdd) {
+                const listItem = document.createElement("li");
+                const quantityInput = document.createElement("input");
+                quantityInput.type = "number";
+                quantityInput.name = `quantity_${product.productName}`;
+                quantityInput.placeholder = "Enter quantity";
+                listItem.textContent = `Product Name: ${product.productName}, Price: $${product.price}, Amount: ${product.amount}`;
+                listItem.appendChild(quantityInput);
+                productList.appendChild(listItem);
+            }
+
+            productListToAddContainer.appendChild(productList);
+        }
+
+        // Display the list of products to add when the page loads
+        displayProductListToAdd();
+
+        // Add an event listener to the search button to redirect to add-stock-search.html
+        document.getElementById("searchButton").addEventListener("click", function () {
+            window.location.href = "add-stock-search.html";
+        });
+
+        document.getElementById("addStockForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from submitting and reloading the page
+
+            // Loop through the products and retrieve the quantities entered by the user
+            for (const product of productListToAdd) {
+                const quantityInput = document.querySelector(`input[name="quantity_${product.productName}"]`);
+                const quantity = parseInt(quantityInput.value, 10);
+
+                // Check if a valid quantity was entered
+                if (!isNaN(quantity) && quantity > 0) {
+                    // Update the product's amount in localStorage
+                    product.amount = parseInt(product.amount, 10) + quantity;
+                }
+            }
+
+            // Save the updated product list to localStorage
+            localStorage.setItem("products", JSON.stringify(productListToAdd));
+
+            // Clear the form and the localStorage
+            localStorage.removeItem("productsToAdd");
+            document.getElementById("addStockForm").reset();
+            document.getElementById("productListToAdd").innerHTML = "No products to add to the stock.";
+        });
+    </script>
+</body>
+</html>
