@@ -152,6 +152,7 @@ body {
     top: 50px; /* Adjusted to make room for the top bar */
     left: 0;
     width: 75%;
+    border-radius: 20px;
 }
 
 .menu ul {
@@ -211,10 +212,17 @@ hr {
 
 }
 
+.navbar :hover {
+    background: #3B6A7E;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
 .logo1 img {
     height: 55px;
     width: 55px;
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 img {
