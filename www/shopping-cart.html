@@ -3,28 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toggle Buttons</title>
+    <title>Shopping Cart</title>
     <style>
-        /* CSS for the popup dialog */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        /* Add some basic CSS for styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 40px;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .add-to-stock-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Toggle Buttons</h1>
+    <h1>Shopping Cart</h1>
     
     <button id="toggleButtons">Toggle Buttons</button>
     <div id="hiddenButtons" style="display: none;">
         <button id="addItemButton">Add Item</button>
         <button id="addLowStockButton">Add Low Stock Items</button>
+    </div>
+
+    <!-- Popup dialog for adding items -->
+    <div id="addItemPopup" class="popup">
+        <h2>Add Item</h2>
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName"><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity"><br>
+        <button id="addItemSubmit">Add</button>
+        <button id="addItemCancel">Cancel</button>
     </div>
 
     <!-- Checklist for added items -->
@@ -37,8 +66,12 @@
         const toggleButton = document.getElementById("toggleButtons");
         const hiddenButtons = document.getElementById("hiddenButtons");
         const addItemButton = document.getElementById("addItemButton");
+        const addItemPopup = document.getElementById("addItemPopup");
+        const productNameInput = document.getElementById("productName");
+        const quantityInput = document.getElementById("quantity");
+        const addItemSubmit = document.getElementById("addItemSubmit");
+        const addItemCancel = document.getElementById("addItemCancel");
         const itemList = document.getElementById("itemList");
-        const addLowStockButton = document.getElementById("addLowStockButton");
 
         let isHidden = true;
 
@@ -52,30 +85,72 @@
         });
 
         addItemButton.addEventListener("click", function () {
-            // Show the popup dialog for adding items
-            // ...
+            // Show the popup dialog
+            addItemPopup.style.display = "block";
         });
 
-        addLowStockButton.addEventListener("click", function () {
-            // Fetch low stock items from the "low-stock-items.html" page
-            fetch("low-stock-items.html")
-                .then((response) => response.text())
-                .then((html) => {
-                    // Create a temporary element to parse the HTML
-                    const tempElement = document.createElement("div");
-                    tempElement.innerHTML = html;
+        addItemCancel.addEventListener("click", function () {
+            // Hide the popup dialog
+            addItemPopup.style.display = "none";
+            // Clear input fields
+            productNameInput.value = "";
+            quantityInput.value = "";
+        });
 
-                    // Retrieve low stock items from the temporary element
-                    const lowStockItems = tempElement.querySelectorAll("li");
+        addItemSubmit.addEventListener("click", function () {
+            const productName = productNameInput.value;
+            const quantity = quantityInput.value;
 
-                    // Add low stock items to the checklist
-                    lowStockItems.forEach((item) => {
-                        itemList.appendChild(item.cloneNode(true));
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error fetching low stock items:", error);
+            if (productName.trim() !== "" && quantity.trim() !== "") {
+                // Create a new list item
+                const listItem = document.createElement("li");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                const label = document.createElement("label");
+                label.textContent = `${productName} (Quantity: ${quantity})`;
+
+                listItem.appendChild(checkbox);
+                listItem.appendChild(label);
+                itemList.appendChild(listItem);
+
+                // Hide the popup dialog
+                addItemPopup.style.display = "none";
+
+                // Clear input fields
+                productNameInput.value = "";
+                quantityInput.value = "";
+            } else {
+                alert("Please enter both Product Name and Quantity.");
+            }
+        });
+
+        // Function to add low stock items from low-stock-items.html
+        function addLowStockItems() {
+            // Retrieve low stock items from low-stock-items.html (assuming the HTML is hosted on the same domain)
+            const lowStockItems = window.localStorage.getItem("lowStockItems");
+
+            if (lowStockItems) {
+                // Parse the low stock items as JSON
+                const lowStockItemsList = JSON.parse(lowStockItems);
+
+                // Add the low stock items to the checklist
+                lowStockItemsList.forEach(item => {
+                    const listItem = document.createElement("li");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    const label = document.createElement("label");
+                    label.textContent = `${item.productName} (Low Stock: ${item.amount})`;
+
+                    listItem.appendChild(checkbox);
+                    listItem.appendChild(label);
+                    itemList.appendChild(listItem);
                 });
+            }
+        }
+
+        // Event listener for the "Add Low Stock Items" button
+        document.getElementById("addLowStockButton").addEventListener("click", function () {
+            addLowStockItems();
         });
     </script>
 </body>
