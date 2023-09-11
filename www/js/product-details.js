@@ -20,7 +20,7 @@ function displayProductDetails() {
                 <strong>Low Stock Warning:</strong> <span contenteditable="true" id="lowStockWarning">${selectedProduct.lowStockWarning || '~'}</span><br>
                 <button id="saveButton" onclick="saveProduct()">Save</button>
                 <button id="deleteButton" onclick="deleteProduct()">Delete</button>
-            `;
+            `;z
 
             return;
         }

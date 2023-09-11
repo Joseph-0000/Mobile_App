@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Management</title>
-</head>
-<body>
-    <h1>Product Management</h1>
-    
-    <form id="productForm">
-        <label for="productName">Product Name:</label>
-        <input type="text" id="productName" required><br><br>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/add-new-item.css">
+        <title>Product Management</title>
+    </head>
 
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" required><br><br>
+    <body>
 
-        <label for="price">Price:</label>
-        <input type="number" step="0.01" id="price" required><br><br>
+        <div class="top-bar-container" id="top-bar-container">
+            <img src="img/vector.png" alt="menu icon" class="menu-icon">
+            <img src="img/logo.png" alt="logo" class="logo">
+        </div>
+        
+        <h1>Product Management</h1>
+        
+        <form id="productForm">
 
-        <label for="lowStockWarning">Low Stock Warning:</label>
-        <input type="number" id="lowStockWarning" required><br><br>
+            <div class="input-container">
+                <label class="label-style" for="productName">Product Name:</label>
+                <input class="input-box" type="text" id="productName" required><br><br>
+            </div>
 
-        <button type="button" onclick="addProduct()">Add Product</button>
-    </form>
+            <div class="input-container">
+                <label class="label-style" for="amount">Amount:</label>
+                <input class="input-box" type="number" id="amount" required><br><br>
+            </div>
 
-    <script src="js/add-new-item.js"></script>
-</body>
+            <div class="input-container">
+                <label class="label-style" for="price">Price:</label>
+                <input class="input-box" type="number" step="0.01" id="price" required><br><br>
+            </div>
+
+            <div class="input-container">
+                <label class="label-style" for="lowStockWarning">Low Stock Warning:</label>
+                <input class="input-box" type="number" id="lowStockWarning" required><br><br>
+            </div>
+
+            <button onclick="addProduct()">Add Product</button>
+
+        </form>
+
+
+
+        <script src="js/add-new-item.js"></script>
+    </body>
 </html>
