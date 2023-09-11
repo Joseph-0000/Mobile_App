@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Search</title>
+</head>
+<body>
+    <h1>Shopping Cart - Search</h1>
+    
+    <!-- Search bar for product search -->
+    <input type="text" id="productSearch" placeholder="Search for a product">
+    
+    <ul id="productList"></ul>
+
+    <script>
+        // Retrieve the products list from localStorage
+        const productsList = JSON.parse(localStorage.getItem("products")) || [];
+        const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+
+        // Function to display the product list
+        function displayProductList(searchText = "") {
+            const productList = document.getElementById("productList");
+
+            // Clear the current product list
+            productList.innerHTML = "";
+
+            // Filter products based on the search text
+            const filteredProducts = productsList.filter(product =>
+                product.productName.toLowerCase().includes(searchText.toLowerCase())
+            );
+
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = "<li>No matching products found.</li>";
+                return;
+            }
+
+            // Display the filtered products
+            filteredProducts.forEach(product => {
+                const listItem = document.createElement("li");
+                const addButton = document.createElement("button");
+
+                addButton.textContent = "Add to Cart";
+                addButton.addEventListener("click", () => {
+                    // Add the selected product to the shopping cart
+                    addToCart(product);
+                });
+
+                listItem.textContent = `${product.productName} - Amount: ${product.amount}`;
+                listItem.appendChild(addButton);
+                productList.appendChild(listItem);
+            });
+        }
+
+        // Function to add a product to the shopping cart
+        function addToCart(productToAdd) {
+            // Check if the product already exists in the shopping cart
+            const existingCartItem = shoppingCart.find(item => item.productName === productToAdd.productName);
+
+            if (existingCartItem) {
+                // If it exists, increment the quantity by 1
+                existingCartItem.quantity += 1;
+            } else {
+                // If it doesn't exist, add it to the shopping cart with a quantity of 1
+                shoppingCart.push({
+                    productName: productToAdd.productName,
+                    quantity: 1
+                });
+            }
+
+            // Save the updated shopping cart to localStorage
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Redirect to the shopping cart page
+            window.location.href = "shopping-cart.html";
+        }
+
+        // Display the initial product list
+        displayProductList();
+
+        // Add event listener to update product list when the search input changes
+        const productSearchInput = document.getElementById("productSearch");
+        productSearchInput.addEventListener("input", () => {
+            displayProductList(productSearchInput.value);
+        });
+    </script>
+</body>
+</html>
