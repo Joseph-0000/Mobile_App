@@ -15,6 +15,22 @@ h1 {
     top: 0;
     left: 0;
 }
+#listItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto; 
+    max-width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    border-radius: 4px;
+    padding: 50px 0;
+    background-color: #3B6A7E;
+    list-style: none;
+}
 
 #productDetails {
     display: flex;
@@ -36,7 +52,7 @@ strong {
     font-family: 'Marko One';
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 24px;
 }
 

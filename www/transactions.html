@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
     <STYle>
+        @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
          /* HAMBURGER MENU */
 .logo {
     position: absolute;
@@ -126,6 +142,23 @@ hr {
     padding: 5px;
 
 }
+#transactionList{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+#transactionList > li {
+    background-color: #3B6A7E;
+    flex: 1;
+    max-width: 80%;
+    padding: 12px;
+    margin: 8px 0;
+    color: #fff;
+    border-radius: 10%;
+}
+
+
     </STYle>
 </head>
 <body>
@@ -166,6 +199,7 @@ hr {
         transactions.forEach((transaction, index) => {
             const listItem = document.createElement("li");
             listItem.innerHTML = `
+            <link rel="stylesheet" href="./css/product-details.css">
                 <strong>Date:</strong> ${transaction.date}<br>
                 <strong>Total Price:</strong> ${transaction.totalPrice}<br>
                 <strong>Payment Amount:</strong> $${transaction.paymentAmount}<br>
