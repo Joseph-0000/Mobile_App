@@ -28,3 +28,21 @@ function viewProduct(index) {
 
 // Display the product list when the page loads
 displayProductList();
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menuContainer = document.querySelector(".menu-container");
+    const menu = document.querySelector(".menu");
+
+    menuToggle.addEventListener("click", function () {
+        menuContainer.classList.toggle("active");
+        menu.classList.toggle("active");
+    });
+
+    // Close the menu when clicking anywhere outside of it
+    document.addEventListener("click", function (event) {
+        if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+            menuContainer.classList.remove("active");
+            menu.classList.remove("active");
+        }
+    });
+});
