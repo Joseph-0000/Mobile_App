@@ -20,11 +20,13 @@
             listItem.innerHTML = `
                 <strong>Date:</strong> ${transaction.date}<br>
                 <strong>Total Price:</strong> ${transaction.totalPrice}<br>
+                <strong>Payment Amount:</strong> $${transaction.paymentAmount}<br>
+                <strong>Change:</strong> $${transaction.change}<br>
                 <strong>Products:</strong><br>
             `;
             transaction.products.forEach((product) => {
                 listItem.innerHTML += `
-                    - ${product.quantity} x ${product.productName} - $${product.price.toFixed(2)} each<br>
+                    - ${product.quantity} x ${product.productName} - $${product.price.toFixed(2)}<br>
                 `;
             });
             listItem.innerHTML += "<hr>";

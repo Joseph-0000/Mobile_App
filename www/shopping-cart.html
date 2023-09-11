@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        /* Add some basic CSS for styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 40px;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .add-to-stock-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    
+    <ul id="cartItemList"></ul>
+    <button id="addToStockButton" class="add-to-stock-button">Add All to Stock</button>
+    <button id="goToSearchButton" class="go-to-search-button">Go to Shopping Cart Search</button>
+
+
+    <script>
+        // Retrieve the shopping cart data from localStorage
+        const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+        const productsList = JSON.parse(localStorage.getItem("products")) || [];
+
+        // Function to display the shopping cart items
+        function displayShoppingCart() {
+            const cartItemList = document.getElementById("cartItemList");
+
+            // Clear the current cart item list
+            cartItemList.innerHTML = "";
+
+            if (shoppingCart.length === 0) {
+                cartItemList.innerHTML = "<li>Your shopping cart is empty.</li>";
+                return;
+            }
+
+            // Display the items in the shopping cart
+            shoppingCart.forEach((item, index) => {
+                const listItem = document.createElement("li");
+                const productNameSpan = document.createElement("span");
+                const quantityInput = document.createElement("input");
+                const deleteButton = document.createElement("button");
+
+                productNameSpan.textContent = `Product Name: ${item.productName}`;
+                quantityInput.type = "number";
+                quantityInput.value = item.quantity;
+                quantityInput.addEventListener("change", () => {
+                    // Update the quantity in the shopping cart when it changes
+                    updateQuantity(index, parseInt(quantityInput.value));
+                });
+
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "delete-button";
+                deleteButton.addEventListener("click", () => {
+                    // Remove the item from the shopping cart when the delete button is clicked
+                    removeFromCart(index);
+                });
+
+                listItem.appendChild(productNameSpan);
+                listItem.appendChild(document.createTextNode(" - Quantity: "));
+                listItem.appendChild(quantityInput);
+                listItem.appendChild(deleteButton);
+
+                cartItemList.appendChild(listItem);
+            });
+        }
+
+        // Function to update the quantity of an item in the shopping cart
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                // Remove the item if the quantity becomes zero or negative
+                removeFromCart(index);
+                return;
+            }
+
+            shoppingCart[index].quantity = newQuantity;
+
+            // Save the updated shopping cart to localStorage
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Refresh the shopping cart display
+            displayShoppingCart();
+        }
+
+        // Function to remove an item from the shopping cart
+        function removeFromCart(index) {
+            shoppingCart.splice(index, 1);
+
+            // Save the updated shopping cart to localStorage
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Refresh the shopping cart display
+            displayShoppingCart();
+        }
+
+        // Function to add the total quantity to the product's amount in the products list
+        function addAllToStock() {
+            shoppingCart.forEach(item => {
+                // Find the product in the products list by its name
+                const productToUpdate = productsList.find(product => product.productName === item.productName);
+
+                if (productToUpdate) {
+                    // Update the product's amount
+                    productToUpdate.amount += item.quantity;
+                }
+            });
+
+            // Clear the shopping cart
+            shoppingCart.length = 0;
+
+            // Save the updated products list and shopping cart to localStorage
+            localStorage.setItem("products", JSON.stringify(productsList));
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Refresh the shopping cart display
+            displayShoppingCart();
+        }
+
+        // Display the shopping cart when the page loads
+        displayShoppingCart();
+
+        // Add event listener to the "Add All to Stock" button
+        const addToStockButton = document.getElementById("addToStockButton");
+        addToStockButton.addEventListener("click", addAllToStock);
+
+        function goToSearch() {
+            window.location.href = "shopping-cart-search.html";
+        }
+
+        // Add event listener to the "Go to Add Stock Search" button
+        const goToSearchButton = document.getElementById("goToSearchButton");
+        goToSearchButton.addEventListener("click", goToSearch);
+
+    </script>
+</body>
+</html>

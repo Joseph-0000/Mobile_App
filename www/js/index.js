@@ -1,6 +1,8 @@
 function showProductPopup() {
     const productPopup = document.getElementById('productPopup');
     const productList = document.getElementById("productList");
+    const searchInput = document.getElementById("searchInput");
+    const doneButton = document.getElementById("doneButton");
     productList.innerHTML = "";
 
     // Retrieve products from localStorage
@@ -19,6 +21,7 @@ function showProductPopup() {
         quantityInput.type = "number";
         quantityInput.className = "productQuantity";
         quantityInput.value = product.amount;
+        quantityInput.max = product.amount; // Set max quantity equal to the inventory quantity
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
@@ -38,6 +41,11 @@ function showProductPopup() {
                     if (parts.length === 2) {
                         const oldQuantity = parseInt(parts[0]);
                         newQuantity += oldQuantity;
+                        if (newQuantity > product.amount) {
+                            // Ensure the quantity doesn't exceed the inventory amount
+                            newQuantity = product.amount;
+                            alert(`The remaining amount of ${product.productName} is ${product.amount} `);
+                        }
 
                         // Create a new selected product element with updated quantity
                         const newTotalPrice = product.price * newQuantity;
@@ -58,7 +66,7 @@ function showProductPopup() {
                                         // Update the displayed quantity in index.html
                                         newQuantity -= quantityToRemove;
                                         quantityInput.value = newQuantity;
-                                        // Remove the old quantity from selectedProducts if new quantity is zero
+                                        // Remove the old quantity from selectedProducts if the new quantity is zero
                                         if (newQuantity === 0) {
                                             selectedProducts.removeChild(item);
                                         } else {
@@ -124,11 +132,31 @@ function showProductPopup() {
         listItem.appendChild(productItem);
         productList.appendChild(listItem);
     });
+
     productPopup.style.display = 'block';
     productPopup.style.backgroundColor = 'red';
+
+    // Add an event listener to the search input
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.toLowerCase();
+        products.forEach((product, index) => {
+            const listItem = productList.children[index];
+            if (product.productName.toLowerCase().includes(searchTerm)) {
+                listItem.style.display = "block";
+            } else {
+                listItem.style.display = "none";
+            }
+        });
+    });
+
+    // Show the "Done" button after filtering
+    doneButton.style.display = 'block';
 }
 
-// Add an event listener to the "Done" button
+
+
+
+
 // Add an event listener to the "Done" button
 const doneButton = document.getElementById("doneButton");
 doneButton.addEventListener("click", function () {
@@ -169,41 +197,26 @@ calculateChangeButton.addEventListener("click", function () {
     const changeElement = document.getElementById("change");
     changeElement.textContent = `Change: $${change.toFixed(2)}`;
 
-    // Hide the payment form after calculating the change
+    // Show the payment form after calculating the change
     const paymentForm = document.getElementById("paymentForm");
-
-    // Clear the payment input field
-    paymentAmountInput.value = "";
+    paymentForm.style.display = "block";
 });
 
-
-// Define a function to save the transaction
-// Define a function to save the transaction
+// Define a function to save the transaction and update the inventory
 function saveTransaction() {
     // Retrieve the transaction details
     const selectedProducts = document.getElementById("selectedProducts");
     const totalSelectedPrice = document.getElementById("totalPrice").textContent;
     const paymentAmountInput = document.getElementById("paymentAmount");
-    
-    // Parse the payment amount
     const paymentAmount = parseFloat(paymentAmountInput.value);
-    
-    // Ensure the payment amount is valid
-    if (isNaN(paymentAmount) || paymentAmount < 0) {
-        alert("Invalid payment amount. Please enter a valid amount.");
-        return;
-    }
-    
-    // Calculate the change
-    const change = paymentAmount - parseFloat(totalSelectedPrice.split("$")[1]);
     
     // Create a transaction object
     const transaction = {
         date: new Date().toLocaleDateString(),
         products: [],
         totalPrice: totalSelectedPrice,
-        paymentAmount: paymentAmount,
-        change: change
+        paymentAmount: paymentAmount.toFixed(2), // Include payment amount
+        change: (paymentAmount - parseFloat(totalSelectedPrice.split("$")[1])).toFixed(2) // Include change
     };
 
     selectedProducts.querySelectorAll("div").forEach((item) => {
@@ -221,6 +234,25 @@ function saveTransaction() {
     transactions.push(transaction);
     localStorage.setItem("transactions", JSON.stringify(transactions));
 
+    // Update the inventory after the transaction
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    selectedProducts.querySelectorAll("div").forEach((item) => {
+        const parts = item.textContent.split(" - Total Price: $");
+        if (parts.length === 2) {
+            const productName = parts[0].split(" - ")[1];
+            const quantity = parseInt(parts[0].split(" - ")[0]);
+
+            // Find the corresponding product in the inventory and update its quantity
+            const inventoryProduct = products.find((product) => product.productName === productName);
+            if (inventoryProduct) {
+                inventoryProduct.amount -= quantity;
+            }
+        }
+    });
+
+    // Save the updated inventory
+    localStorage.setItem("products", JSON.stringify(products));
+
     // Clear the transaction on the index.html
     const productList = document.getElementById("productList");
     productList.innerHTML = "";
@@ -231,15 +263,17 @@ function saveTransaction() {
 
     // Clear the selected products display
     selectedProducts.innerHTML = "";
-    
-    // Clear the payment input field
+
+    // Clear the payment input and change display
     paymentAmountInput.value = "";
+    const changeElement = document.getElementById("change");
+    changeElement.textContent = "";
 
     // Display a success message
     alert("Transaction saved successfully!");
 }
 
-// Add an event listener to the "Save Transaction" button once
+// Add an event listener to the "Save Transaction" button
 const saveTransactionButton = document.getElementById("saveTransactionButton");
 saveTransactionButton.addEventListener("click", function (event) {
     // Prevent the default form submission behavior
@@ -249,7 +283,15 @@ saveTransactionButton.addEventListener("click", function (event) {
     saveTransaction();
 });
 
+// Function to clear saved transactions
+function clearTransactions() {
+    localStorage.removeItem("transactions");
+    alert("Saved transactions have been cleared.");
+}
 
-
-
-
+// Add an event listener to the "Clear Saved Transactions" button
+const clearTransactionsButton = document.getElementById("clearTransactionsButton");
+clearTransactionsButton.addEventListener("click", function () {
+    // Call the clearTransactions function to remove saved transactions
+    clearTransactions();
+});
