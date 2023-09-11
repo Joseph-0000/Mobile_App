@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        /* Add some basic CSS for styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: 40px;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .add-to-stock-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /*HAMBURGER MENU*/
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: auto;
+    max-width: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.top-bar-container {
+    display: flex;
+    justify-content: space-between; /* Adjusted to create space between logo and menu */
+    align-items: center;
+    height: 70px;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: flex-start; /* Adjusted to move the menu to the top left */
+    align-items: center;
+    padding: 10px;
+    background-color: #E7D6AA;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+}
+
+.menu {
+    display: none;
+    background-color: #333;
+    position: absolute;
+    top: 50px; /* Adjusted to make room for the top bar */
+    left: 0;
+    width: 100%;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    padding: 10px;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    color: #1E1E1E;
+    font-family: 'Marko One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+hr {
+    margin: 5px 0;
+    border: 0;
+    border-top: 1px solid #fff;
+}
+
+.menu.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #E7D6AA; /* Use the background color of top-bar-container */
+    z-index: 1000; /* Ensure the menu is above other content */
+    overflow-y: auto; /* Enable scrolling if the menu content exceeds the screen height */
+    padding-top: 70px;
+}
+.top-bar-container.menu-open .menu-container {
+    left: 0;
+}
+.menu-container.active .menu-toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1001; /* Ensure menu-toggle is above the menu */
+    display: block;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+
+}
+    </style>
+</head>
+<body>
+    <div class="top-bar-container" id="top-bar-container">
+        <div class="menu-container">
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="index.html">Transaction</a></li>
+                    <li><a href="transactions.html">Transaction History</a></li>
+                    <hr>
+                    <li><a href="inventory-tab.html">Inventory</a></li>
+                    <li><a href="add-new-item.html">Add new Item</a></li>
+                    <li><a href="add-stock.html">Add Stock</a></li>
+                    <li><a href="low-stock-items.html">Low stock Item</a></li>
+                    <li><a href="inventory-history.html">Inventory History</a></li>
+                    <hr>
+                    <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+        <img src="img/logo.png" alt="logo" class="logo">
+    </div>
+    <h1>Shopping Cart</h1>
+    
+    <ul id="cartItemList"></ul>
+    <button id="addToStockButton" class="add-to-stock-button">Add All to Stock</button>
+
+    <script>
+        // Retrieve the shopping cart data from localStorage
+        const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+        const productsList = JSON.parse(localStorage.getItem("products")) || [];
+
+        // Function to display the shopping cart items
+        function displayShoppingCart() {
+            const cartItemList = document.getElementById("cartItemList");
+
+            // Clear the current cart item list
+            cartItemList.innerHTML = "";
+
+            if (shoppingCart.length === 0) {
+                cartItemList.innerHTML = "<li>Your shopping cart is empty.</li>";
+                return;
+            }
+
+            // Display the items in the shopping cart
+            shoppingCart.forEach((item, index) => {
+                const listItem = document.createElement("li");
+                const productNameSpan = document.createElement("span");
+                const quantityInput = document.createElement("input");
+                const deleteButton = document.createElement("button");
+
+                productNameSpan.textContent = `Product Name: ${item.productName}`;
+                quantityInput.type = "number";
+                quantityInput.value = item.quantity;
+                quantityInput.addEventListener("change", () => {
+                    // Update the quantity in the shopping cart when it changes
+                    updateQuantity(index, parseInt(quantityInput.value));
+                });
+
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "delete-button";
+                deleteButton.addEventListener("click", () => {
+                    // Remove the item from the shopping cart when the delete button is clicked
+                    removeFromCart(index);
+                });
+
+                listItem.appendChild(productNameSpan);
+                listItem.appendChild(document.createTextNode(" - Quantity: "));
+                listItem.appendChild(quantityInput);
+                listItem.appendChild(deleteButton);
+
+                cartItemList.appendChild(listItem);
+            });
+        }
+
+        // Function to update the quantity of an item in the shopping cart
+        function updateQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                // Remove the item if the quantity becomes zero or negative
+                removeFromCart(index);
+                return;
+            }
+
+            shoppingCart[index].quantity = newQuantity;
+
+            // Save the updated shopping cart to localStorage
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Refresh the shopping cart display
+            displayShoppingCart();
+        }
+
+        // Function to remove an item from the shopping cart
+        function removeFromCart(index) {
+            shoppingCart.splice(index, 1);
+
+            // Save the updated shopping cart to localStorage
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Refresh the shopping cart display
+            displayShoppingCart();
+        }
+
+        // Function to add the total quantity to the product's amount in the products list
+        function addAllToStock() {
+            shoppingCart.forEach(item => {
+                // Find the product in the products list by its name
+                const productToUpdate = productsList.find(product => product.productName === item.productName);
+
+                if (productToUpdate) {
+                    // Update the product's amount
+                    productToUpdate.amount += item.quantity;
+                }
+            });
+
+            // Clear the shopping cart
+            shoppingCart.length = 0;
+
+            // Save the updated products list and shopping cart to localStorage
+            localStorage.setItem("products", JSON.stringify(productsList));
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            // Refresh the shopping cart display
+            displayShoppingCart();
+        }
+
+        // Display the shopping cart when the page loads
+        displayShoppingCart();
+
+        // Add event listener to the "Add All to Stock" button
+        const addToStockButton = document.getElementById("addToStockButton");
+        addToStockButton.addEventListener("click", addAllToStock);
+        //HAMBURGER MENU
+        document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menuContainer = document.querySelector(".menu-container");
+    const menu = document.querySelector(".menu");
+
+    menuToggle.addEventListener("click", function () {
+        menuContainer.classList.toggle("active");
+        menu.classList.toggle("active");
+    });
+
+    // Close the menu when clicking anywhere outside of it
+    document.addEventListener("click", function (event) {
+        if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+            menuContainer.classList.remove("active");
+            menu.classList.remove("active");
+        }
+    });
+});
+    </script>
+</body>
+</html>

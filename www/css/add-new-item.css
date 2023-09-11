@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+
+
+body {
+    align-items: center; 
+    height: 100vh; 
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto; 
+    max-width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    border-radius: 4px;
+    padding: 50px 0;
+}
+
+.input-container {
+    display: flex;
+    width: 80%;
+    margin: 10px;
+    align-items: center;
+}
+
+.input-box {
+    background: #3B6A7E;
+    border-radius: 4px;
+    width: 100%;
+    height: 30px;
+    flex: 2;
+}
+
+.label-style {
+    color: #1E1E1E;
+    font-family: 'Marko One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    flex: 1;
+    margin-right: 10px;
+}
+
+button {
+font-family: 'Lemon';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+display: flex;
+color: #FFFFFF;
+display: flex;
+width: 50%;
+height: 40px;
+margin-top: 50px;
+background-color: #D3414D;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+
+
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: auto;
+    max-width: none;
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.top-bar-container {
+    display: flex;
+    justify-content: space-between; /* Adjusted to create space between logo and menu */
+    align-items: center;
+    height: 70px;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: flex-start; /* Adjusted to move the menu to the top left */
+    align-items: center;
+    padding: 10px;
+    background-color: #E7D6AA;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+}
+
+.menu {
+    display: none;
+    background-color: #333;
+    position: absolute;
+    top: 50px; /* Adjusted to make room for the top bar */
+    left: 0;
+    width: 100%;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    padding: 10px;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    color: #1E1E1E;
+    font-family: 'Marko One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+hr {
+    margin: 5px 0;
+    border: 0;
+    border-top: 1px solid #fff;
+}
+
+.menu.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #E7D6AA; /* Use the background color of top-bar-container */
+    z-index: 1000; /* Ensure the menu is above other content */
+    overflow-y: auto; /* Enable scrolling if the menu content exceeds the screen height */
+    padding-top: 70px;
+}
+.top-bar-container.menu-open .menu-container {
+    left: 0;
+}
+.menu-container.active .menu-toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1001; /* Ensure menu-toggle is above the menu */
+    display: block;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/transaction.css">
+    <title>Transactions</title>
+</head>
+<body>
+    <!--HAMBURGER MENU-->
+    <div class="top-bar-container" id="top-bar-container">
+        <div class="menu-container">
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="index.html">Transaction</a></li>
+                    <li><a href="transactions.html">Transaction History</a></li>
+                    <hr>
+                    <li><a href="inventory-tab.html">Inventory</a></li>
+                    <li><a href="add-new-item.html">Add new Item</a></li>
+                    <li><a href="add-stock.html">Add Stock</a></li>
+                    <li><a href="low-stock-items.html">Low stock Item</a></li>
+                    <li><a href="inventory-history.html">Inventory History</a></li>
+                    <hr>
+                    <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+        <img src="img/logo.png" alt="logo" class="logo">
+    </div>
+    <h1>Transactions History</h1>
+    <ul id="transactionList"></ul>
+    
+    <script>
+        // Retrieve saved transactions from localStorage
+        const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+        // Display saved transactions in a list
+        const transactionList = document.getElementById("transactionList");
+        transactions.forEach((transaction, index) => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                <strong>Date:</strong> ${transaction.date}<br>
+                <strong>Total Price:</strong> ${transaction.totalPrice}<br>
+                <strong>Payment Amount:</strong> $${transaction.paymentAmount}<br>
+                <strong>Change:</strong> $${transaction.change}<br>
+                <strong>Products:</strong><br>
+            `;
+            transaction.products.forEach((product) => {
+                listItem.innerHTML += `
+                    - ${product.quantity} x ${product.productName} - $${product.price.toFixed(2)}<br>
+                `;
+            });
+            listItem.innerHTML += "<hr>";
+            transactionList.appendChild(listItem);
+        });
+        //HAMBURGER MENU
+        document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menuContainer = document.querySelector(".menu-container");
+    const menu = document.querySelector(".menu");
+
+    menuToggle.addEventListener("click", function () {
+        menuContainer.classList.toggle("active");
+        menu.classList.toggle("active");
+    });
+
+    // Close the menu when clicking anywhere outside of it
+    document.addEventListener("click", function (event) {
+        if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+            menuContainer.classList.remove("active");
+            menu.classList.remove("active");
+        }
+    });
+});
+    </script>
+</body>
+</html>

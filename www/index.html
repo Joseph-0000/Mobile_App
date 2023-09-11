@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body background="img/banderitas.png">
+    <!--HAMBURGER MENU-->
+    <div class="top-bar-container" id="top-bar-container">
+        <div class="menu-container">
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav class="menu">
+                <div class="logo1">
+                    <img src="img/logo_2.png" alt="">
+                </div>
+                <ul class="navbar">
+                    <li><a href="index.html">Transaction</a></li>
+                    <li><a href="transactions.html">Transaction History</a></li>
+                    <hr>
+                    <li><a href="inventory-tab.html">Inventory</a></li>
+                    <li><a href="add-new-item.html">Add new Item</a></li>
+                    <li><a href="add-stock.html">Add Stock</a></li>
+                    <li><a href="low-stock-items.html">Low stock Item</a></li>
+                    <li><a href="inventory-history.html">Inventory History</a></li>
+                    <hr>
+                    <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+        <img src="img/logo.png" alt="logo" class="logo">
+    </div>
+    <main>
+        <h1>Transaction</h1>
+        <button id="add_item" onclick="showProductPopup()"><img src="./img/plus_icon.png" alt=""></button>
+        <!-- Add a div to display selected products -->
+        <div id="selectedProducts"></div>
+    </main>
+
+    <!-- Product List Popup -->
+    <div id="productPopup" style="display: none;">
+        <h1>Select Items</h1>
+        <input type="text" id="searchInput" placeholder="Search items"> <!-- Add a search input field -->
+        <ul id="productList"></ul>
+        <button id="doneButton">Done</button> <!-- Move the "Done" button here -->
+    </div>
+    <p id="totalPrice"></p>
+    <!-- Payment Component -->
+    <!-- Payment Component -->
+    <div id="paymentForm" style="display: none;">
+        <h2>Payment</h2>
+        <label for="paymentAmount">Enter Payment Amount: $</label>
+        <input type="number" id="paymentAmount" step="0.01" min="0" required>
+        <button id="calculateChangeButton">Calculate Change</button>
+        <p id="change"></p>
+    </div>
+
+    <button id="saveTransactionButton" onclick="saveTransaction()">Save Transaction</button>
+    <button id="clearTransactionsButton">Clear Transactions</button>
+    <script src="js/index.js"></script>
+</body>
+</html>
