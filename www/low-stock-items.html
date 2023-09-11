@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Low Stock Items</title>
+    <style>
+        /* Add some basic CSS for styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .add-to-cart-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Low Stock Items</h1>
@@ -13,54 +38,89 @@
             <tr>
                 <th>Product Name</th>
                 <th>Amount</th>
+                <th>Add to Cart</th>
             </tr>
         </thead>
-        <tbody id="lowStockItemsTableBody"></tbody>
+        <tbody id="lowStockItemList"></tbody>
     </table>
 
     <script>
         // Retrieve the products list from localStorage
         const productsList = JSON.parse(localStorage.getItem("products")) || [];
+        const lowStockThreshold = 10; // You can adjust this threshold as needed
 
-        // Function to display low stock items or a message if none found
+        // Function to display the low stock items
         function displayLowStockItems() {
-            const lowStockItemsTableBody = document.getElementById("lowStockItemsTableBody");
+            const lowStockItemList = document.getElementById("lowStockItemList");
 
-            // Clear the table body
-            lowStockItemsTableBody.innerHTML = "";
+            // Clear the current low stock item list
+            lowStockItemList.innerHTML = "";
 
-            // Flag to check if any low stock items are found
-            let foundLowStockItems = false;
+            // Filter products based on the low stock threshold
+            const lowStockProducts = productsList.filter(product =>
+                product.lowStockWarning >= product.amount
+            );
 
-            for (const product of productsList) {
-                // Check if the lowStockWarning is greater than or equal to the amount
-                if (product.lowStockWarning >= product.amount) {
-                    const row = document.createElement("tr");
-                    const productNameCell = document.createElement("td");
-                    const amountCell = document.createElement("td");
-
-                    productNameCell.textContent = product.productName;
-                    amountCell.textContent = product.amount;
-
-                    row.appendChild(productNameCell);
-                    row.appendChild(amountCell);
-
-                    lowStockItemsTableBody.appendChild(row);
-
-                    // Set the flag to true if low stock items are found
-                    foundLowStockItems = true;
-                }
+            if (lowStockProducts.length === 0) {
+                lowStockItemList.innerHTML = "<tr><td colspan='3'>No low stock items found.</td></tr>";
+                return;
             }
 
-            // If no low stock items are found, display a message
-            if (!foundLowStockItems) {
-                const noLowStockMessageRow = document.createElement("tr");
-                const noLowStockMessageCell = document.createElement("td");
-                noLowStockMessageCell.setAttribute("colspan", "2");
-                noLowStockMessageCell.textContent = "No low quantity items found";
-                noLowStockMessageRow.appendChild(noLowStockMessageCell);
-                lowStockItemsTableBody.appendChild(noLowStockMessageRow);
+            // Display the low stock items
+            lowStockProducts.forEach(product => {
+                const row = document.createElement("tr");
+                const productNameCell = document.createElement("td");
+                const amountCell = document.createElement("td");
+                const addToCartCell = document.createElement("td");
+                const addToCartButton = document.createElement("button");
+
+                productNameCell.textContent = product.productName;
+                amountCell.textContent = product.amount;
+
+                addToCartButton.textContent = "Add to Cart";
+                addToCartButton.className = "add-to-cart-button";
+                addToCartButton.addEventListener("click", () => {
+                    // Add the selected product to the shopping cart
+                    addToCart(product);
+                });
+
+                addToCartCell.appendChild(addToCartButton);
+
+                row.appendChild(productNameCell);
+                row.appendChild(amountCell);
+                row.appendChild(addToCartCell);
+
+                lowStockItemList.appendChild(row);
+            });
+        }
+
+        // Function to add a product to the shopping cart
+        // Function to add a product to the shopping cart
+        function addToCart(productToAdd) {
+            const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
+            
+            // Check if the product already exists in the shopping cart
+            const existingItemIndex = shoppingCart.findIndex(item => item.productName === productToAdd.productName);
+            
+            if (existingItemIndex !== -1) {
+                // If it exists, increment the quantity by 1
+                shoppingCart[existingItemIndex].quantity += 1;
+            } else {
+                // If it doesn't exist, add it to the shopping cart with a quantity of 1
+                shoppingCart.push({
+                    productName: productToAdd.productName,
+                    quantity: 1
+                });
             }
+            
+            // Save the updated shopping cart to localStorage
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+            
+            // Alert the user or provide feedback (you can customize this part)
+            alert(`"${productToAdd.productName}" added to the shopping cart.`);
+            
+            // Refresh the low stock item display
+            displayLowStockItems();
         }
 
         // Display the low stock items when the page loads
