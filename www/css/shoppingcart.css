@@ -1,14 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
-
-
-body {
-    align-items: center; 
-    height: 100vh; 
-    margin: 0;
-    padding: 0;
+header {
+    height: 55px;
+    width: 100%;
 }
-
 h1 {
     color: #E5AF37;
     text-shadow: 4px 4px 4px rgb(211, 65, 77);
@@ -16,77 +11,21 @@ h1 {
     font-family: 'Lemon';
     font-style: normal;
     font-weight: 400;
-    font-size: px;
+    font-size: 24px;
     line-height: 52px;
     text-align: center;
     position: relative;
     top: 0;
     left: 0;
 }
-
-form {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto; 
-    max-width: 90%;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    overflow: auto;
-    background: #E7D6AA;
-    border-radius: 4px;
-    padding: 50px 0;
+main {
+    position: relative;
 }
-
-.input-container {
-    display: flex;
-    width: 80%;
-    margin: 10px;
-    align-items: center;
+img {
+    height: 22px;
+    width: 22px;
+    color: white;
 }
-
-.input-box {
-    background: #3B6A7E;
-    border-radius: 4px;
-    width: 100%;
-    height: 30px;
-    flex: 2;
-}
-
-.label-style {
-    color: #1E1E1E;
-    font-family: 'Marko One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    flex: 1;
-    margin-right: 10px;
-}
-
-button {
-font-family: 'Lemon';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 24px;
-display: flex;
-color: #FFFFFF;
-display: flex;
-width: 50%;
-height: 40px;
-margin-top: 50px;
-background-color: #D3414D;
-justify-content: center;
-align-items: center;
-text-align: center;
-}
-
-
-
-
 .logo {
     position: absolute;
     top: 50%;
@@ -96,13 +35,12 @@ text-align: center;
     height: auto;
     max-width: none;
 }
-
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
 }
-
+         /* HAMBURGER MENU */
 .top-bar-container {
     display: flex;
     justify-content: space-between; /* Adjusted to create space between logo and menu */
@@ -185,6 +123,7 @@ body {
 }
 
 
+
 hr {
     margin: 5px 0;
     border: 0;
@@ -202,7 +141,8 @@ hr {
     overflow-y: auto;
     padding-top: 91px;
     padding-bottom: 22px;
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     height: 100%;
 }
 .top-bar-container.menu-open .menu-container {
@@ -226,4 +166,109 @@ hr {
     padding-left: 12px;
     padding-bottom: 12px;
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.add-to-cart-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    height: auto; 
+    max-width: 90%;
+    margin: 0 auto;
+
+    overflow: auto;
+    background: #E7D6AA;
+    border-radius: 4px;
+    padding: 50px 0;
+}
+
+li {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Marko One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    
+}
+
+input[type="number"] {
+    width: 40px;
+    background: #3B6A7E;
+    border-radius: 4px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.label-row {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #1E1E1E;
+    font-family: 'Marko One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.label-row span {
+    flex: 1;
+    color: #1E1E1E;
+
+}
+
+.quantity-label {
+    text-align: center;
+    margin-top: 10px;
+}
+.add-to-stock-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+}
+.center-button{
+    padding-top: 10px;
+    text-align: center;
+}
+#goToSearchButton{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 20px; /* Add margin for spacing */
+}

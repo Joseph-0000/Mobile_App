@@ -143,13 +143,18 @@ body {
     margin: 3px 0;
 }
 
+.menu-toggle :hover {
+    background-color: #3B6A7E;
+}
+
 .menu {
     display: none;
     background-color: #333;
     position: absolute;
     top: 50px; /* Adjusted to make room for the top bar */
     left: 0;
-    width: 100%;
+    width: 75%;
+
 }
 
 .menu ul {
@@ -166,13 +171,20 @@ body {
     color: #fff;
     text-decoration: none;
     display: block;
-    color: #1E1E1E;
+    color: #3B6A7E;
     font-family: 'Marko One';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
 }
+
+.menu ul :hover {
+    background-color: #3B6A7E;
+    color: #fff;
+}
+
+
 
 hr {
     margin: 5px 0;
@@ -184,13 +196,16 @@ hr {
     display: block;
     position: fixed;
     top: 0;
+    width: 28%;
     left: 0;
-    width: 100%;
+    background: #E7D6AA;
+    z-index: 1000;
+    overflow-y: auto;
+    padding-top: 91px;
+    padding-bottom: 22px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     height: 100%;
-    background: #E7D6AA; /* Use the background color of top-bar-container */
-    z-index: 1000; /* Ensure the menu is above other content */
-    overflow-y: auto; /* Enable scrolling if the menu content exceeds the screen height */
-    padding-top: 70px;
 }
 .top-bar-container.menu-open .menu-container {
     left: 0;
@@ -206,5 +221,11 @@ hr {
     cursor: pointer;
     padding: 5px;
 
+}
+.logo2 img {
+    height: 85px;
+    width: 86px;
+    padding-left: 12px;
+    padding-bottom: 12px;
 }
 
