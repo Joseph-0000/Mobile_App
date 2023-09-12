@@ -1,9 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+<<<<<<< HEAD
+
+
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+}
+
+#saveTransactionButton {
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 24px;
+    display: flex;
+    color: #FFFFFF;
+    display: flex;
+    width: 150;
+    height: 40px;
+    margin-top: 50px;
+    background-color: #D3414D;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#clearTransactionsButton {
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 24px;
+    display: flex;
+    color: #FFFFFF;
+    display: flex;
+    width: 150px;
+    height: 40px;
+    margin-top: 50px;
+    background-color: #D3414D;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#add_item {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; 
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #D3414D;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto; 
+    max-width: 90%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    border-radius: 4px;
+    padding: 50px 0;
+}
+
+h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+=======
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 header {
     height: 55px;
     width: 100%;
 }
+<<<<<<< HEAD
+
+.add_item {
+    height: 24px;
+    width: 24px;
+=======
 /* Style for each transaction box */
 .transaction-box {
     border: 1px solid #ccc;
@@ -57,20 +157,41 @@ main {
     justify-content: center;
     border: solid 1px #D3414D;
     background-color: #D3414D;
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 }
+
 img {
     height: 22px;
     width: 22px;
     color: white;
 }
+
 .productList {
     height: 100%;
     width: 75%;
 }
+
 .productPopup{
     background-color: red;
 }
 
+<<<<<<< HEAD
+.top-bar-container {
+    display: flex;
+    justify-content: space-between; /* Adjusted to create space between logo and menu */
+    align-items: center;
+    height: 70px;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+=======
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 
 /* Makes the popup overlap the screen */
 #productPopup {
@@ -101,6 +222,8 @@ body {
     font-family: Arial, sans-serif;
 }
 
+<<<<<<< HEAD
+=======
 
 /* HAMBURGER MENU */
 .top-bar-container {
@@ -118,6 +241,7 @@ body {
     position: relative;
 }
 
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 .menu-container {
     display: flex;
     justify-content: flex-start; /* Adjusted to move the menu to the top left */
