@@ -9,7 +9,7 @@ function showProductPopup() {
     const searchInput = document.getElementById("searchInput");
     const doneButton = document.getElementById("doneButton");
     doneButton.style.justifySelf = "center";
-    doneButton.style.backgroundColor = "#D3414D";
+    doneButton.style.backgroundColor = "#3B6A7E";
     productList.innerHTML = "";
 
     const buttonContainer = document.createElement("div");
@@ -34,19 +34,22 @@ function showProductPopup() {
         productName.textContent = `${product.productName} - $${product.price}`;
         const quantityInput = document.createElement("input");
         quantityInput.style.fontFamily = "Marko One";
-        quantityInput.style.height = "24px";
-        quantityInput.style.backgroundColor = "#3B6A7E";
+        quantityInput.style.height = "18px";
+        quantityInput.style.backgroundColor = "#E7D6AA";
         quantityInput.style.flex = "1";
         quantityInput.type = "number";
+        quantityInput.style.width = "24px";
         quantityInput.className = "productQuantity";
         quantityInput.value = product.amount;
         quantityInput.max = product.amount; // Set max quantity equal to the inventory quantity
 
 
         const addButton = document.createElement("button");
-        addButton.style.height = "32px";
+        addButton.style.height = "24px";
         addButton.style.flex = "1";
         addButton.style.fontFamily = "Marko One";
+        addButton.style.backgroundColor = "#3B6A7E";
+        addButton.style.color = "#ffffff"
         addButton.textContent = "Add";
         addButton.onclick = function () {
             // Get the updated quantity value from the input field
@@ -119,6 +122,8 @@ function showProductPopup() {
                 const removeButton = document.createElement("button");
                 removeButton.style.fontFamily = "Marko One";
                 removeButton.textContent = "Remove";
+                removeButton.style.backgroundColor = "#3B6A7E";
+                removeButton.style.color = "#ffffff";
                 removeButton.onclick = function () {
                     const removeQuantity = prompt(`How many ${product.productName} would you like to remove? (Max: ${newQuantity})`);
                     if (removeQuantity !== null) {

@@ -167,3 +167,21 @@ hr {
     padding-bottom: 12px;
 }
 
+#transactionList{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+#transactionList li {
+    background-color: #E7D6AA;
+    flex: 1;
+    max-width: 80%;
+    padding: 12px;
+    margin: 8px 0;
+    color: #fff;
+    border-radius: 24px;
+}
+#transactionList li:hover {
+    background-color: #3B6A7E;
+}
