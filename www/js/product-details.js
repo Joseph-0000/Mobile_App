@@ -49,6 +49,8 @@ function saveProduct() {
 
             // Save the updated product list to localStorage
             localStorage.setItem("products", JSON.stringify(products));
+
+            window.location.href = "inventory-tab.html";
         }
     }
 }
