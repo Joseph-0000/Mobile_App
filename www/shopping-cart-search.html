@@ -4,14 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Search</title>
+    <style>
+        /* CSS styles for the search bar and container */
+        h1 {
+            text-align: center;
+        }
+        
+        /* Styling for the search bar */
+        #productSearch {
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px;
+            width: 50%;
+            margin: 0 auto; /* Center the search bar horizontally */
+        }
+        #searcbarcenter{
+            text-align: center;
+            padding-bottom: 10px;
+        }
+        /* Styling for the container */
+        #container {
+            background-color: #E7D6AA;
+            max-width: 600px; /* Set a maximum width for the container */
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+        }
+        
+        /* Styling for the product list */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            margin: 10px 0;
+        }
+    </style>
+    
 </head>
 <body>
     <h1>Shopping Cart - Search</h1>
     
     <!-- Search bar for product search -->
-    <input type="text" id="productSearch" placeholder="Search for a product">
+    <div id="searcbarcenter"><input type="text" id="productSearch" placeholder="Search for a product"></div>
     
-    <ul id="productList"></ul>
+    
+    <div id="container">
+        <ul id="productList"></ul>
+    </div>
 
     <script>
         // Retrieve the products list from localStorage
@@ -38,18 +78,26 @@
             // Display the filtered products
             filteredProducts.forEach(product => {
                 const listItem = document.createElement("li");
-                const addButton = document.createElement("button");
+                listItem.style.display = 'flex'; // Use flexbox to align content
 
+                const productInfo = document.createElement("div");
+                productInfo.innerHTML = `<strong>Product:</strong> ${product.productName}<br><strong>Amount:</strong> ${product.amount}`;
+                productInfo.style.flex = '1'; // Make product info expand to fill available space
+
+                const addButton = document.createElement("button");
                 addButton.textContent = "Add to Cart";
                 addButton.addEventListener("click", () => {
                     // Add the selected product to the shopping cart
                     addToCart(product);
                 });
 
-                listItem.textContent = `${product.productName} - Amount: ${product.amount}`;
+                listItem.appendChild(productInfo);
                 listItem.appendChild(addButton);
                 productList.appendChild(listItem);
             });
+
+
+
         }
 
         // Function to add a product to the shopping cart

@@ -5,6 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Stock</title>
     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+        h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#addStock{
+    font-family: "Marko One";
+    height: 32px;
+    width: 200px;
+    margin-top: 16px;
+    background-color: #D3414D;
+    border: none;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+#addStockForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E7D6AA;
+    padding: 24px;
+    list-style-type: none;
+    max-width: 80%;
+    margin: 0;
+}
+#searchButton{
+    height: 48px;
+    width: 48px;
+    margin: 8px auto;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #D3414D;
+    border: none;
+    border-radius: 50%;
+}
+#mg {
+    height: 24px;
+    width: 24px;
+}
+#buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
         .logo {
     position: absolute;
     top: 50%;
@@ -19,6 +86,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    position: relative;
+    height: 100vh;
 }
 
 .top-bar-container {
@@ -125,6 +194,9 @@ hr {
     padding: 5px;
 
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
     </style>
 </head>
 <body>
@@ -156,20 +228,28 @@ hr {
     <h1>Add Stock</h1>
 
     <!-- Add a search button to redirect to add-stock-search.html -->
-    <button id="searchButton">Search for Products</button>
-
-    <form id="addStockForm">
-        <div id="productListToAdd"></div>
-        <button type="submit">Add to Stock</button>
-    </form>
+    
+    <button id="searchButton"><img id="mg" src="./img/magnifying_glass.png" alt="Search"></button>
+    <div id="wrapper">
+        <form id="addStockForm">
+            <div id="productListToAdd"></div>
+            <div id="buttons">
+                
+            <button id="addStock" type="submit">Add to Stock</button>
+            </div>
+        </form>
+    </div>
 
     <script>
+        
         // Retrieve the list of products to add from localStorage
         const productListToAdd = JSON.parse(localStorage.getItem("productsToAdd")) || [];
 
         function displayProductListToAdd() {
             const productListToAddContainer = document.getElementById("productListToAdd");
             productListToAddContainer.innerHTML = "";
+            productListToAddContainer.style.display = "flex";
+            productListToAddContainer.style.flexDirection = "column";
 
             if (productListToAdd.length === 0) {
                 productListToAddContainer.innerHTML = "No products to add to the stock.";
@@ -177,11 +257,25 @@ hr {
             }
 
             const form = document.getElementById("addStockForm");
+            form.style.display = "flex";
+            form.style.flexDirection = "column";
 
             const productList = document.createElement("ul");
+            productList.style.margin = "0px 0px 0px 0px";
+            productList.style.listStyleType = "none";
+            productList.style.fontFamily = 'Marko One';
             for (const product of productListToAdd) {
                 const listItem = document.createElement("li");
                 const quantityInput = document.createElement("input");
+                quantityInput.style.margin = "8px 0px 0px 8px"
+                quantityInput.style.height = "32px";
+                quantityInput.style.width = "100px";
+                listItem.style.width = "300px";
+                listItem.style.margin = "8px auto"
+                listItem.style.fontSize = "14px"
+                listItem.style.borderRadius = "5%";
+                listItem.style.backgroundColor = "#3B6A7E";
+                listItem.style.padding = "8px";
                 quantityInput.type = "number";
                 quantityInput.name = `quantity_${product.productName}`;
                 quantityInput.placeholder = "Enter quantity";

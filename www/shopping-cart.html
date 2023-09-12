@@ -5,18 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <style>
+         @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
         /* Add some basic CSS for styling */
+        
         ul {
             list-style-type: none;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: auto; 
+            max-width: 90%;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            overflow: auto;
+            background: #E7D6AA;
+            border-radius: 4px;
+            padding: 50px 0;
         }
 
         li {
-            margin-bottom: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Marko One';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 24px;
+            
         }
 
         input[type="number"] {
             width: 40px;
+            background: #3B6A7E;
+            border-radius: 4px;
         }
 
         .delete-button {
@@ -26,14 +63,45 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+        .label-row {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #1E1E1E;
+            font-family: 'Marko One';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+        }
 
+        .label-row span {
+            flex: 1;
+            color: #1E1E1E;
+    
+        }
+
+        .quantity-label {
+            text-align: center;
+            margin-top: 10px;
+        }
         .add-to-stock-button {
             background-color: green;
             color: white;
             border: none;
             padding: 5px 10px;
             cursor: pointer;
+            font-family: 'Lemon';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 24px;
         }
+        .center-button{
+            padding-top: 10px;
+            text-align: center;
+        }
+
 
         /*HAMBURGER MENU*/
 .logo {
@@ -156,6 +224,28 @@ hr {
     padding: 5px;
 
 }
+
+h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#goToSearchButton{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 20px; /* Add margin for spacing */
+}
     </style>
 </head>
 <body>
@@ -186,12 +276,24 @@ hr {
     <h1>Shopping Cart</h1>
     
     <ul id="cartItemList"></ul>
+    <div class="center-button">
     <button id="addToStockButton" class="add-to-stock-button">Add All to Stock</button>
+    </div>
+    <button id="goToSearchButton" class="go-to-search-button">+</button>
+    
 
     <script>
         // Retrieve the shopping cart data from localStorage
         const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
         const productsList = JSON.parse(localStorage.getItem("products")) || [];
+
+        function goToSearch() {
+            window.location.href = "shopping-cart-search.html";
+        }
+
+        // Add event listener to the "Go to Add Stock Search" button
+        const goToSearchButton = document.getElementById("goToSearchButton");
+        goToSearchButton.addEventListener("click", goToSearch);
 
         // Function to display the shopping cart items
         function displayShoppingCart() {
@@ -205,6 +307,12 @@ hr {
                 return;
             }
 
+            // Add a header row for labels
+            const labelRow = document.createElement("li");
+            labelRow.className = "label-row";
+            labelRow.innerHTML = '<span>Product Name</span><span>Quantity</span>';
+            cartItemList.appendChild(labelRow);
+
             // Display the items in the shopping cart
             shoppingCart.forEach((item, index) => {
                 const listItem = document.createElement("li");
@@ -212,7 +320,7 @@ hr {
                 const quantityInput = document.createElement("input");
                 const deleteButton = document.createElement("button");
 
-                productNameSpan.textContent = `Product Name: ${item.productName}`;
+                productNameSpan.textContent = item.productName;
                 quantityInput.type = "number";
                 quantityInput.value = item.quantity;
                 quantityInput.addEventListener("change", () => {
@@ -227,10 +335,13 @@ hr {
                     removeFromCart(index);
                 });
 
+                // Create a container div to align the delete button to the right
+                const buttonContainer = document.createElement("div");
+                buttonContainer.appendChild(deleteButton);
+
                 listItem.appendChild(productNameSpan);
-                listItem.appendChild(document.createTextNode(" - Quantity: "));
                 listItem.appendChild(quantityInput);
-                listItem.appendChild(deleteButton);
+                listItem.appendChild(buttonContainer);
 
                 cartItemList.appendChild(listItem);
             });

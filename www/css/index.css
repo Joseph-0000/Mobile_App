@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+<<<<<<< HEAD
 
 
 
@@ -91,19 +92,78 @@ h1 {
     left: 0;
 }
 
+=======
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 header {
     height: 55px;
     width: 100%;
 }
+<<<<<<< HEAD
 
 .add_item {
     height: 24px;
     width: 24px;
+=======
+/* Style for each transaction box */
+.transaction-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the transaction details within each box */
+.transaction-details {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style for the individual product details within each transaction box */
+.product-item {
+    margin-bottom: 5px;
+}
+
+h1 {
+    color: #E5AF37;
+    text-shadow: 4px 4px 4px rgb(211, 65, 77);
+    margin: 20px 0;
+    font-family: 'Lemon';
+    font-style: normal;
+    font-weight: 400;
+    font-size: px;
+    line-height: 52px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+main {
+    position: relative;
+}
+#add_item {
+    position: fixed;
+    bottom: 20px; /* Adjust the bottom position as needed */
+    right: 20px; /* Adjust the right position as needed */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    width: 48px; /* Set the button width as needed */
+    height: 48px; /* Set the button height as needed */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px #D3414D;
+    background-color: #D3414D;
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 }
 
 img {
-    height: 18px;
-    width: 18px;
+    height: 22px;
+    width: 22px;
+    color: white;
 }
 
 .productList {
@@ -115,6 +175,7 @@ img {
     background-color: red;
 }
 
+<<<<<<< HEAD
 .top-bar-container {
     display: flex;
     justify-content: space-between; /* Adjusted to create space between logo and menu */
@@ -129,6 +190,8 @@ img {
     box-sizing: border-box;
     position: relative;
 }
+=======
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 
 /* Makes the popup overlap the screen */
 #productPopup {
@@ -159,6 +222,26 @@ body {
     font-family: Arial, sans-serif;
 }
 
+<<<<<<< HEAD
+=======
+
+/* HAMBURGER MENU */
+.top-bar-container {
+    display: flex;
+    justify-content: space-between; /* Adjusted to create space between logo and menu */
+    align-items: center;
+    height: 70px;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+>>>>>>> 74a54c3dc4a75fd2b7e438bef25ffc4f04df3c09
 .menu-container {
     display: flex;
     justify-content: flex-start; /* Adjusted to move the menu to the top left */
