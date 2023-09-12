@@ -3,6 +3,7 @@ function showProductPopup() {
     const productList = document.getElementById("productList");
     const searchInput = document.getElementById("searchInput");
     const doneButton = document.getElementById("doneButton");
+    doneButton.style.backgroundColor = "red";
     productPopup.style.backgroundColor = "#3B6A7E";
     productList.innerHTML = "";
 
@@ -16,6 +17,7 @@ function showProductPopup() {
         const productItem = document.createElement("div");
         const productName = document.createElement("span");
         listItem.style.backgroundColor = "#3B6A7E";
+        productName.style.fontSize = "24px";
         productName.textContent = `${product.productName} - $${product.price}`;
         const quantityInput = document.createElement("input");
         quantityInput.type = "number";
