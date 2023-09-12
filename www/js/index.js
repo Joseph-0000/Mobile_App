@@ -135,7 +135,7 @@ function showProductPopup() {
     });
 
     productPopup.style.display = 'block';
-    productPopup.style.backgroundColor = 'red';
+    productPopup.style.backgroundColor = '#E7D6AA';
 
     // Add an event listener to the search input
     searchInput.addEventListener("input", function () {

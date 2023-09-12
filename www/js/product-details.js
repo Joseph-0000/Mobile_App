@@ -43,9 +43,9 @@ function saveProduct() {
         if (selectedProductIndex >= 0 && selectedProductIndex < products.length) {
             // Update product data with the edited values
             products[selectedProductIndex].productName = document.getElementById("productName").textContent;
-            products[selectedProductIndex].amount = document.getElementById("amount").textContent;
+            products[selectedProductIndex].amount = parseInt(document.getElementById("amount").textContent);
             products[selectedProductIndex].price = parseFloat(document.getElementById("price").textContent);
-            products[selectedProductIndex].lowStockWarning = document.getElementById("lowStockWarning").textContent;
+            products[selectedProductIndex].lowStockWarning = parseInt(document.getElementById("lowStockWarning").textContent);
 
             // Save the updated product list to localStorage
             localStorage.setItem("products", JSON.stringify(products));

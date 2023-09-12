@@ -4,17 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Stock Search</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
+        #stockSearch{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #searchForm {
+            font-family: "Marko One";
+            height: 48px;
+        }
+        #searchInput {
+            height: 24px;
+            border-radius: 10%;
+
+        }
+        #searchButton {
+            height: 24px;
+            background-color: #3B6A7E;
+        }
+        /* HAMBURGER MENU */
+        .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: auto;
+    max-width: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+        .top-bar-container {
+    display: flex;
+    justify-content: space-between; /* Adjusted to create space between logo and menu */
+    align-items: center;
+    height: 70px;
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    overflow: auto;
+    background: #E7D6AA;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: flex-start; /* Adjusted to move the menu to the top left */
+    align-items: center;
+    padding: 10px;
+    background-color: #E7D6AA;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+}
+
+.menu {
+    display: none;
+    background-color: #333;
+    position: absolute;
+    top: 50px; /* Adjusted to make room for the top bar */
+    left: 0;
+    width: 100%;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    padding: 10px;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    color: #1E1E1E;
+    font-family: 'Marko One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+hr {
+    margin: 5px 0;
+    border: 0;
+    border-top: 1px solid #fff;
+}
+
+.menu.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #E7D6AA; /* Use the background color of top-bar-container */
+    z-index: 1000; /* Ensure the menu is above other content */
+    overflow-y: auto; /* Enable scrolling if the menu content exceeds the screen height */
+    padding-top: 70px;
+}
+.top-bar-container.menu-open .menu-container {
+    left: 0;
+}
+.menu-container.active .menu-toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1001; /* Ensure menu-toggle is above the menu */
+    display: block;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+
+}
+    </style>
 </head>
 <body>
-    <h1>Add Stock Search</h1>
+     <!--HAMBURGER MENU-->
+     <div class="top-bar-container" id="top-bar-container">
+        <div class="menu-container">
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="index.html">Transaction</a></li>
+                    <li><a href="transactions.html">Transaction History</a></li>
+                    <hr>
+                    <li><a href="inventory-tab.html">Inventory</a></li>
+                    <li><a href="add-new-item.html">Add new Item</a></li>
+                    <li><a href="add-stock.html">Add Stock</a></li>
+                    <li><a href="low-stock-items.html">Low stock Item</a></li>
+                    <li><a href="inventory-history.html">Inventory History</a></li>
+                    <hr>
+                    <li><a href="shopping-cart.html">Shopping Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+        <img src="img/logo.png" alt="logo" class="logo">
+    </div>
+    <div id="stockSearch">
+        <h1>Add Stock Search</h1>
     
-    <form id="searchForm">
-        <label for="searchInput">Search:</label>
-        <input type="text" id="searchInput" name="searchInput">
-        <button type="submit">Search</button>
-    </form>
-
-    <div id="searchResults"></div>
+        <form id="searchForm">
+            <label for="searchInput">Search:</label>
+            <input type="text" id="searchInput" name="searchInput">
+            <button type="submit" id="searchButton">Search</button>
+        </form>
+    
+        <div id="searchResults"></div>
+    </div>
+    
 
     <script>
         // Retrieve products from localStorage
@@ -47,9 +218,24 @@
             }
 
             const resultList = document.createElement("ul");
+            resultList.style.display = "flex";
+            resultList.style.flexDirection = "column";
+            resultList.style.alignItems = "center";
+            resultList.style.justifyContent = "center"
+            resultList.style.backgroundColor = "#E7D6AA";
+            resultList.style.listStyleType = "none";
+            resultList.style.width = "100vw";
+            resultList.style.padding = "16px 8px";
             for (const product of results) {
                 const listItem = document.createElement("li");
                 const addButton = document.createElement("button");
+                listItem.style.backgroundColor = "none";
+                addButton.style.width = " 300px";
+                addButton.style.margin = "8px auto";
+                addButton.style.fontSize = "14px";
+                addButton.style.padding = "12px 8px";
+                addButton.style.fontFamily = "Marko One";
+                addButton.style.backgroundColor = "#E7D6AA";
                 addButton.textContent = `Add to List: ${product.productName}`;
                 addButton.addEventListener("click", function () {
                     // Add the selected product to the list
@@ -57,6 +243,7 @@
                 });
                 listItem.appendChild(addButton);
                 resultList.appendChild(listItem);
+                
             }
 
             searchResultsContainer.appendChild(resultList);
@@ -75,6 +262,24 @@
             // Redirect to "add-stock.html"
             window.location.href = "add-stock.html";
         }
+        document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const menuContainer = document.querySelector(".menu-container");
+    const menu = document.querySelector(".menu");
+
+    menuToggle.addEventListener("click", function () {
+        menuContainer.classList.toggle("active");
+        menu.classList.toggle("active");
+    });
+
+    // Close the menu when clicking anywhere outside of it
+    document.addEventListener("click", function (event) {
+        if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+            menuContainer.classList.remove("active");
+            menu.classList.remove("active");
+        }
+    });
+});
     </script>
 </body>
 </html>

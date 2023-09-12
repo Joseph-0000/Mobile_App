@@ -35,33 +35,42 @@
         </div>
         <img src="img/logo.png" alt="logo" class="logo">
     </div>
-    <main>
-        <h1>Transaction</h1>
-        <button id="add_item" onclick="showProductPopup()"><img src="./img/add_icon.png" alt=""></button>
-        <!-- Add a div to display selected products -->
-        <div id="selectedProducts"></div>
-    </main>
 
-    <!-- Product List Popup -->
-    <div id="productPopup" style="display: none;">
-        <h1>Select Items</h1>
-        <input type="text" id="searchInput" placeholder="Search items"> <!-- Add a search input field -->
-        <ul id="productList"></ul>
-        <button id="doneButton">Done</button> <!-- Move the "Done" button here -->
+    <h1>Transaction</h1>
+
+    <div class="main-container">
+        <main>
+            <button id="add_item" onclick="showProductPopup()"><img src="./img/plus_icon.png" alt=""></button>
+            <!-- Add a div to display selected products -->
+            <div id="selectedProducts"></div>
+        </main>
+
+        <!-- Product List Popup -->
+        <div id="productPopup" style="display: none;">
+            <h1 class="select-items">Select Items</h1>
+            <input type="text" id="searchInput" placeholder="Search items"> <!-- Add a search input field -->
+            <ul id="productList"></ul>
+            <button id="doneButton">Done</button> <!-- Move the "Done" button here -->
+        </div>
+
+        <p id="totalPrice"></p>
+        <!-- Payment Component -->
+        <!-- Payment Component -->
+        <div id="paymentForm" style="display: none;">
+            <h2>Payment</h2>
+            <label for="paymentAmount">Enter Payment Amount: $</label>
+            <input type="number" id="paymentAmount" step="0.01" min="0" required>
+            <button id="calculateChangeButton">Calculate Change</button>
+            <p id="change"></p>
+        </div>
+
+        <div class="button-container">
+            <button id="saveTransactionButton" onclick="saveTransaction()">Save Transaction</button>
+            <button id="clearTransactionsButton">Clear Transactions</button>
+        </div>
+
+        <script src="js/index.js"></script>
+
     </div>
-    <p id="totalPrice"></p>
-    <!-- Payment Component -->
-    <!-- Payment Component -->
-    <div id="paymentForm" style="display: none;">
-        <h2>Payment</h2>
-        <label for="paymentAmount">Enter Payment Amount: $</label>
-        <input type="number" id="paymentAmount" step="0.01" min="0" required>
-        <button id="calculateChangeButton">Calculate Change</button>
-        <p id="change"></p>
-    </div>
-    
-    <button id="saveTransactionButton" onclick="saveTransaction()">Save Transaction</button>
-    <button id="clearTransactionsButton">Clear Transactions</button>
-    <script src="js/index.js"></script>
 </body>
 </html>
