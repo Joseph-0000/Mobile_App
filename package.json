@@ -19,5 +19,8 @@
     "platforms": [
       "android"
     ]
+  },
+  "dependencies": {
+    "gradle": "^1.2.4"
   }
 }

@@ -1,11 +1,22 @@
 function showProductPopup() {
     const productPopup = document.getElementById('productPopup');
+    productPopup.style.display = "flex";
+    productPopup.style.flexDirection = "column";
+    productPopup.style.alignItems = "center";
+    productPopup.style.justifyContent = "center"
     const productList = document.getElementById("productList");
+    productList.style.padding = "4px 24px";
     const searchInput = document.getElementById("searchInput");
     const doneButton = document.getElementById("doneButton");
-    doneButton.style.backgroundColor = "red";
-    productPopup.style.backgroundColor = "#3B6A7E";
+    doneButton.style.justifySelf = "center";
+    doneButton.style.backgroundColor = "#D3414D";
     productList.innerHTML = "";
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.style.display = "flex";
+    buttonContainer.style.flexDirection = "column";
+    buttonContainer.style.alignItems = "center";
+    buttonContainer.style.justifyContent = "center";
 
     // Retrieve products from localStorage
     const products = JSON.parse(localStorage.getItem("products")) || [];
@@ -14,12 +25,18 @@ function showProductPopup() {
 
     products.forEach((product, index) => {
         const listItem = document.createElement("li");
+        listItem.style.margin = "16px 0";
         const productItem = document.createElement("div");
+        productItem.style.display = "flex";
         const productName = document.createElement("span");
-        listItem.style.backgroundColor = "#3B6A7E";
-        productName.style.fontSize = "24px";
+        productName.style.fontFamily = "Marko One";
+        productName.style.flex = "2";
         productName.textContent = `${product.productName} - $${product.price}`;
         const quantityInput = document.createElement("input");
+        quantityInput.style.fontFamily = "Marko One";
+        quantityInput.style.height = "24px";
+        quantityInput.style.backgroundColor = "#3B6A7E";
+        quantityInput.style.flex = "1";
         quantityInput.type = "number";
         quantityInput.className = "productQuantity";
         quantityInput.value = product.amount;
@@ -27,6 +44,9 @@ function showProductPopup() {
 
 
         const addButton = document.createElement("button");
+        addButton.style.height = "32px";
+        addButton.style.flex = "1";
+        addButton.style.fontFamily = "Marko One";
         addButton.textContent = "Add";
         addButton.onclick = function () {
             // Get the updated quantity value from the input field
@@ -53,7 +73,6 @@ function showProductPopup() {
                         // Create a new selected product element with updated quantity
                         const newTotalPrice = product.price * newQuantity;
                         item.textContent = `${newQuantity} - ${product.productName} - Total Price: $${newTotalPrice}`;
-
                         // Update the quantity input field in the product list popup
                         quantityInput.value = newQuantity;
 
@@ -92,6 +111,8 @@ function showProductPopup() {
             // If not found, create a new element to display the selected product with quantity and price
             if (!found) {
                 const selectedProductItem = document.createElement("div");
+                selectedProductItem.style.display = "flex";
+                selectedProductItem.style.padding = "8px"
 
                 // Create a "Remove" button for this selected product
                 const removeButton = document.createElement("button");
@@ -122,10 +143,10 @@ function showProductPopup() {
 
                 // Initialize the selected product display
                 selectedProductItem.textContent = `${newQuantity} - ${product.productName} - Total Price: $${totalPrice}`;
-
                 // Append the "Remove" button and the selected product to the selectedProducts div
                 selectedProductItem.appendChild(removeButton);
                 selectedProducts.appendChild(selectedProductItem);
+                
             }
         };
 
@@ -182,7 +203,10 @@ doneButton.addEventListener("click", function () {
     
     // Show the payment form
     const paymentForm = document.getElementById("paymentForm");
-    paymentForm.style.display = 'block';
+    paymentForm.style.display = 'flex';
+    paymentForm.style.flexDirection = "column";
+    paymentForm.style.justifyContent = "center";
+    paymentForm.style.alignItems = "center";
 });
 
 // Add an event listener to the "Calculate Change" button
@@ -230,6 +254,9 @@ function saveTransaction() {
             const price = parseFloat(parts[1]);
             transaction.products.push({ productName, quantity, price });
         }
+        productName.style.flex = "3";
+        quantity.style.flex = "1";
+        price.style.flex = "3";
     });
 
     // Save the transaction details to localStorage
