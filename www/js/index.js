@@ -233,7 +233,7 @@ calculateChangeButton.addEventListener("click", function () {
 
     // Show the payment form after calculating the change
     const paymentForm = document.getElementById("paymentForm");
-    paymentForm.style.display = "block";
+    paymentForm.style.display = "flex";
 });
 
 // Define a function to save the transaction and update the inventory
