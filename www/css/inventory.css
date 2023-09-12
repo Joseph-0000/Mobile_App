@@ -39,6 +39,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
          /* HAMBURGER MENU */
 .top-bar-container {
@@ -166,4 +169,38 @@ hr {
     padding-left: 12px;
     padding-bottom: 12px;
 }
+
+#productList {
+    list-style: none;
+    font-family: 'Lemon';
+}
+
+#productList li {
+    display: flex; 
+    justify-content: center;
+    padding: 5px;
+
+}
+
+#productList ul {
+    align-items: center;
+}
+
+#productList li button {
+    background-color: #E7D6AA;
+    color: #3B6A7E;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 314px;
+    height: 100px;
+    font-family: 'Marko One';
+    font-size: 18px;
+}
+
+#productList li button:hover {
+    background-color: #3B6A7E;
+    color: #fff;
+}
+
 

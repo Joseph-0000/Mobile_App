@@ -76,6 +76,7 @@
 }
 
 h1 {
+    padding-top: 70px;
     color: #E5AF37;
     text-shadow: 4px 4px 4px rgb(211, 65, 77);
     margin: 20px 0;
@@ -157,6 +158,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
 }
 
 .menu-container {
