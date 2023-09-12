@@ -1,5 +1,5 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Marko+One&display=swap');
 
 h1 {
     color: #E5AF37;
@@ -56,10 +56,6 @@ span[contenteditable="true"] {
     align-items: center;
 }
 
-/* Style the buttons */
-button {
-
-}
 
 #saveButton {
     font-family: 'Lemon';
