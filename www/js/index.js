@@ -3,6 +3,7 @@ function showProductPopup() {
     const productList = document.getElementById("productList");
     const searchInput = document.getElementById("searchInput");
     const doneButton = document.getElementById("doneButton");
+    productPopup.style.backgroundColor = "#3B6A7E";
     productList.innerHTML = "";
 
     // Retrieve products from localStorage
@@ -13,15 +14,15 @@ function showProductPopup() {
     products.forEach((product, index) => {
         const listItem = document.createElement("li");
         const productItem = document.createElement("div");
-
         const productName = document.createElement("span");
+        listItem.style.backgroundColor = "#3B6A7E";
         productName.textContent = `${product.productName} - $${product.price}`;
-
         const quantityInput = document.createElement("input");
         quantityInput.type = "number";
         quantityInput.className = "productQuantity";
         quantityInput.value = product.amount;
         quantityInput.max = product.amount; // Set max quantity equal to the inventory quantity
+
 
         const addButton = document.createElement("button");
         addButton.textContent = "Add";
