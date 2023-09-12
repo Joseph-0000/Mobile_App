@@ -112,10 +112,12 @@ function showProductPopup() {
             if (!found) {
                 const selectedProductItem = document.createElement("div");
                 selectedProductItem.style.display = "flex";
-                selectedProductItem.style.padding = "8px"
+                selectedProductItem.style.padding = "8px";
+                selectedProductItem.style.alignItems = "center";
 
                 // Create a "Remove" button for this selected product
                 const removeButton = document.createElement("button");
+                removeButton.style.fontFamily = "Marko One";
                 removeButton.textContent = "Remove";
                 removeButton.onclick = function () {
                     const removeQuantity = prompt(`How many ${product.productName} would you like to remove? (Max: ${newQuantity})`);
@@ -254,9 +256,6 @@ function saveTransaction() {
             const price = parseFloat(parts[1]);
             transaction.products.push({ productName, quantity, price });
         }
-        productName.style.flex = "3";
-        quantity.style.flex = "1";
-        price.style.flex = "3";
     });
 
     // Save the transaction details to localStorage
