@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory History</title>
+<<<<<<< HEAD
+    <link rel="stylesheet" href="css/inventory-history.css">
+=======
     <link rel="stylesheet" href="./css/inventoryhistory.css">
+>>>>>>> d7b77987a4506466fc29d646d73017f8580b1ef0
 </head>
+
 <body>
     <!--HAMBURGER MENU-->
     <div class="top-bar-container" id="top-bar-container">
@@ -37,17 +42,19 @@
     </div>
     <h1>Inventory History</h1>
     
-    <table>
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Amount</th>
-                <th>Date</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody id="historyTableBody"></tbody>
-    </table>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+        </table>
+    </div>
 
     <script>
         // Retrieve the inventory history from localStorage
