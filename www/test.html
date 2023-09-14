@@ -3,37 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="./css/shoppingcart.css">
+    <style>
+        body {
+            position: relative;
+        }
+
+        #add-to-stock {
+            margin-top: 20px; /* Add some space between the table and the button */
+        }
+
+        #go-to-search {
+            position: fixed; /* Change to fixed position */
+            bottom: 10px;
+            right: 10px;
+            border-radius: 50%; /* Make the background round */
+            background-color: red; /* Set the background color to red */
+            padding: 10px; /* Add some padding for better appearance */
+            z-index: 1; /* Ensure the button is above other content */
+        }
+
+        #go-to-search img {
+            display: block; /* Ensure the image is centered */
+        }
+    </style>
 </head>
 <body>
-    <div class="top-bar-container" id="top-bar-container">
-        <div class="menu-container">
-            <div class="menu-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <nav class="menu">
-                <div class="logo2">
-                    <img src="img/logo_2.png" alt="">
-                </div>
-                <ul>
-                    <li><a href="index.html">Transaction</a></li>
-                    <li><a href="transactions.html">Transaction History</a></li>
-                    <hr>
-                    <li><a href="inventory-tab.html">Inventory</a></li>
-                    <li><a href="add-new-item.html">Add new Item</a></li>
-                    <li><a href="add-stock.html">Add Stock</a></li>
-                    <li><a href="low-stock-items.html">Low stock Item</a></li>
-                    <li><a href="inventory-history.html">Inventory History</a></li>
-                    <hr>
-                    <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                </ul>
-            </nav>
-        </div>
-        <img src="img/logo.png" alt="logo" class="logo">
-    </div>
     <h1>Shopping Cart</h1>
     <table>
         <thead>
@@ -132,25 +126,6 @@
 
         // Display the shopping cart when the page loads
         displayShoppingCart();
-        //HAMBURGER MENU
-        document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.querySelector(".menu-toggle");
-    const menuContainer = document.querySelector(".menu-container");
-    const menu = document.querySelector(".menu");
-
-    menuToggle.addEventListener("click", function () {
-        menuContainer.classList.toggle("active");
-        menu.classList.toggle("active");
-    });
-
-    // Close the menu when clicking anywhere outside of it
-    document.addEventListener("click", function (event) {
-        if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
-            menuContainer.classList.remove("active");
-            menu.classList.remove("active");
-        }
-    });
-});
     </script>
 </body>
 </html>
