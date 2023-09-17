@@ -98,7 +98,7 @@ ul {
     z-index: 90; 
     width: 50px;
     height: 50px;
-    border-radius: 25px;
+    border-radius: 10px;
     background-color: #3B6A7E;
     border-style: none;
 }
@@ -146,6 +146,7 @@ header {
     height: 24px;
     width: 24px;
     border-style: none;
+    border-radius: 10px;
 }
 
 img {

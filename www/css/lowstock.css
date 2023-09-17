@@ -178,12 +178,14 @@ th, td {
     text-align: center;
     font-family: "Marko One";
     background: #E7D6AA;
+    color: #3B6A7E;
     
     
 }
 
 th {
-    background: #E7D6AA;
+    background: #3B6A7E;
+    color: #fff;
 }
 
 .add-to-cart-button {

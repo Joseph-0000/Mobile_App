@@ -48,7 +48,7 @@ h1 {
 }
 
 strong {
-    color: #fff;
+    color: #3B6A7E;
     font-family: 'Marko One';
     font-style: normal;
     font-weight: 600;
@@ -71,6 +71,7 @@ span[contenteditable="true"] {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
 }
 
 
@@ -86,12 +87,14 @@ span[contenteditable="true"] {
     width: 100px;
     height: 40px;
     margin-top: 50px;
-    background-color: #D3414D;
+    background-color: #3B6A7E;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex: 1;
     margin-right: 20px;
+    border-style: none;
+    border-radius: 10px;
 }
 
 
@@ -108,12 +111,14 @@ span[contenteditable="true"] {
     width: 100px;
     height: 40px;
     margin-top: 50px;
-    background-color: #D3414D;
+    background-color: #3B6A7E;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex: 1;
     margin-left: 20px;
+    border-style: none;
+    border-radius: 10px;
 }
 
 /* Style the error message */

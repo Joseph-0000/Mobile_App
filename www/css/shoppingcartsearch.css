@@ -37,8 +37,37 @@ img {
 }
 body {
     margin: 0;
+    
     padding: 0;
     font-family: Arial, sans-serif;
+    position: relative;
+}
+.buttoncontainer{
+    text-align: center;
+}
+#add-to-stock {
+    margin-top: 20px; /* Add some space between the table and the button */
+    
+    font-family: "Marko One";
+    color: #fff;
+    background-color: #3B6A7E;
+    border-radius: 10px;
+    height: 40px;
+    width: 40;
+}
+
+#go-to-search {
+    position: fixed; /* Change to fixed position */
+    bottom: 10px;
+    right: 10px;
+    border-radius: 50%; /* Make the background round */
+    background-color: #3B6A7E; /* Set the background color to red */
+    padding: 10px; /* Add some padding for better appearance */
+    z-index: 1; /* Ensure the button is above other content */
+}
+
+#go-to-search img {
+    display: block; /* Ensure the image is centered */
 }
          /* HAMBURGER MENU */
 .top-bar-container {
@@ -166,57 +195,38 @@ hr {
     padding-left: 12px;
     padding-bottom: 12px;
 }
-#addStock{
-    font-family: "Marko One";
-    height: 32px;
-    width: 100px;
-    margin-top: 16px;
-    background-color: #3B6A7E;
-    border: none;
-    color: #fff;
-    border-radius: 10px;
+h1 {
+    text-align: center;
 }
+
+/* Styling for the search bar */
+#productSearch {
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px;
+    width: 50%;
+    margin: 0 auto; /* Center the search bar horizontally */
+}
+#searcbarcenter{
+    text-align: center;
+    padding-bottom: 10px;
+}
+/* Styling for the container */
+#container {
+    background-color: #E7D6AA;
+    max-width: 600px; /* Set a maximum width for the container */
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    font-family: 'Marko One';
+    color: #3B6A7E;
+}
+
+/* Styling for the product list */
 ul {
     list-style-type: none;
     padding: 0;
 }
-#addStockForm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E7D6AA;
-    padding: 24px;
-    list-style-type: none;
-    max-width: 80%;
-    margin: 0;
-    font-family: 'Marko One';
-    color: #3B6A7E;
-    border-radius: 10px;
-}
-#searchButton{
-    height: 48px;
-    width: 48px;
-    margin: 8px auto;
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background-color: #3B6A7E;
-    border: none;
-    border-radius: 50%;
-}
-#mg {
-    height: 24px;
-    width: 24px;
-}
-#buttons{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-#wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+
+li {
+    margin: 10px 0;
 }

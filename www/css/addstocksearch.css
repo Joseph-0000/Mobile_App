@@ -166,57 +166,26 @@ hr {
     padding-left: 12px;
     padding-bottom: 12px;
 }
-#addStock{
+#stockSearch{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#searchForm {
     font-family: "Marko One";
-    height: 32px;
-    width: 100px;
-    margin-top: 16px;
+    height: 48px;
+}
+#searchInput {
+    height: 24px;
+    border-radius: 10%;
+    color: #3B6A7E;
+
+}
+#searchButton {
+    height: 30px;
     background-color: #3B6A7E;
-    border: none;
     color: #fff;
     border-radius: 10px;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-#addStockForm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E7D6AA;
-    padding: 24px;
-    list-style-type: none;
-    max-width: 80%;
-    margin: 0;
     font-family: 'Marko One';
-    color: #3B6A7E;
-    border-radius: 10px;
-}
-#searchButton{
-    height: 48px;
-    width: 48px;
-    margin: 8px auto;
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background-color: #3B6A7E;
-    border: none;
-    border-radius: 50%;
-}
-#mg {
-    height: 24px;
-    width: 24px;
-}
-#buttons{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-#wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
 }

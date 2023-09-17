@@ -49,6 +49,11 @@ body {
     margin-top: 20px; /* Add some space between the table and the button */
     
     font-family: "Marko One";
+    color: #fff;
+    background-color: #3B6A7E;
+    border-radius: 10px;
+    height: 40px;
+    width: 40;
 }
 
 #go-to-search {
@@ -56,7 +61,7 @@ body {
     bottom: 10px;
     right: 10px;
     border-radius: 50%; /* Make the background round */
-    background-color: red; /* Set the background color to red */
+    background-color: #3B6A7E; /* Set the background color to red */
     padding: 10px; /* Add some padding for better appearance */
     z-index: 1; /* Ensure the button is above other content */
 }
@@ -202,12 +207,14 @@ th, td {
     text-align: center;
     font-family: "Marko One";
     background: #E7D6AA;
+    color: #3B6A7E;
     
     
 }
 
 th {
-    background: #E7D6AA;
+    background-color: #3B6A7E;
+    color: #fff;
 }
 
 .add-to-cart-button {
@@ -272,7 +279,6 @@ input[type="number"] {
 .label-row span {
     flex: 1;
     color: #1E1E1E;
-
 }
 
 .quantity-label {

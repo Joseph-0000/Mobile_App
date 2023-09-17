@@ -175,10 +175,12 @@ th, td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
+    color: #3B6A7E;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #3B6A7E;
+    color: #fff;
 }
 
 .add-to-cart-button {
