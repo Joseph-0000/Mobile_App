@@ -3,18 +3,23 @@
 
 
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
+    margin: auto;
+    
 }
 
 th, td {
-    border: 1px solid #ccc;
     padding: 8px;
-    text-align: center; /* Center the content */
+    text-align: center;
+    font-family: "Marko One";
+    background: #E7D6AA;
+    
+    
 }
 
 th {
-    background-color: #f2f2f2;
+    background: #E7D6AA;
 }
 
 /* Adjust the width of each column as needed */
@@ -49,7 +54,6 @@ td:nth-child(4) {
     overflow: auto;
     background: #E7D6AA;
     border-radius: 4px;
-    padding: 50px 0;
 }
 
 h1 {

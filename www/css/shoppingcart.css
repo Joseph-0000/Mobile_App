@@ -37,12 +37,18 @@ img {
 }
 body {
     margin: 0;
+    
     padding: 0;
     font-family: Arial, sans-serif;
     position: relative;
 }
+.buttoncontainer{
+    text-align: center;
+}
 #add-to-stock {
     margin-top: 20px; /* Add some space between the table and the button */
+    
+    font-family: "Marko One";
 }
 
 #go-to-search {
@@ -185,18 +191,23 @@ hr {
     padding-bottom: 12px;
 }
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
+    margin: auto;
+    
 }
 
 th, td {
-    border: 1px solid #ccc;
     padding: 8px;
-    text-align: left;
+    text-align: center;
+    font-family: "Marko One";
+    background: #E7D6AA;
+    
+    
 }
 
 th {
-    background-color: #f2f2f2;
+    background: #E7D6AA;
 }
 
 .add-to-cart-button {
@@ -290,3 +301,19 @@ input[type="number"] {
     right: 0;
     margin: 20px; /* Add margin for spacing */
 }
+
+.delete-button {
+    width: auto; /* Adjust the width and height as needed */
+    background-color: red;
+    border-radius: 10px; /* Adjust the border-radius to control the roundness of corners */
+    color: white; /* Text color (if you want text inside the button) */
+    text-align: center; /* Center text horizontally */
+    border: none; /* Remove the default button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-family: "Marko One";
+  }
+  
+  /* Optional: Hover effect */
+  .delete-button:hover {
+    background-color: darkred; /* Change the background color on hover */
+  }

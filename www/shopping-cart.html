@@ -47,8 +47,8 @@
             <!-- The cart items will be dynamically added here -->
         </tbody>
     </table>
-
-    <button id="add-to-stock">Add to Stock</button>
+    <div class="buttoncontainer"><button id="add-to-stock">Add to Stock</button></div>
+    
 
     <!-- Image button for "Go to Shopping Cart Search" -->
     <a href="shopping-cart-search.html" id="go-to-search">
@@ -68,7 +68,7 @@
                 row.innerHTML = `
                     <td>${item.productName}</td>
                     <td contenteditable="true" onBlur="updateQuantity('${item.productName}', this.innerText)">${item.quantity}</td>
-                    <td><button onclick="deleteCartItem('${item.productName}')">Delete</button></td>
+                    <td><button class="delete-button" onclick="deleteCartItem('${item.productName}')">Delete</button></td>
                 `;
                 cartTable.appendChild(row);
             });
@@ -110,13 +110,15 @@
             const products = JSON.parse(localStorage.getItem('products')) || [];
             products.forEach(product => {
                 if (productQuantities[product.productName]) {
+                    const addQuantity = parseInt(productQuantities[product.productName]);
                     product.amount += productQuantities[product.productName];
 
                     // Save to history
                     const historyItem = {
                         productName: product.productName,
-                        quantity: productQuantities[product.productName],
-                        date: new Date().toLocaleString(),
+                        amount: addQuantity,
+                        date: new Date().toLocaleDateString(),                        
+                        type: "addstock" 
                     };
 
                     const history = JSON.parse(localStorage.getItem('history')) || [];
