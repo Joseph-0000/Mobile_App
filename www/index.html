@@ -72,5 +72,32 @@
         <script src="js/index.js"></script>
 
     </div>
+    
+<!-- The pop-up modal -->
+<div id="popupModal" class="modal">
+    <div class="modal-content">
+        <span class="popup-close" onclick="closePopup()">&times;</span>
+        <h2>Welcome!</h2>
+        <p>It is our honor to help you manage your sari-sari store! Look through the tabs on the left to check all the features for your full experience. Happy selling!</p>
+    </div>
+</div>
+<script>
+function displayPopup() {
+    var modal = document.getElementById('popupModal');
+    modal.style.display = 'block';
+}
+
+// Function to close the popup modal
+function closePopup() {
+    var modal = document.getElementById('popupModal');
+    modal.style.display = 'none';
+}
+
+// Automatically display the popup modal when the page loads
+window.onload = function() {
+    displayPopup();
+};
+
+</script>
 </body>
 </html>

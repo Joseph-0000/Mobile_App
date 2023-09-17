@@ -184,4 +184,5 @@ hr {
 }
 #transactionList li:hover {
     background-color: #3B6A7E;
+    color: #fff;
 }
